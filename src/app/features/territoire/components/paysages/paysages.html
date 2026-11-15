@@ -1,0 +1,141 @@
+
+<section class="landscapes-page">
+
+  <div class="landscapes-container">
+
+    <!-- TITRE -->
+    <header class="heading">
+
+      <h1>Deux paysages : Kemet et Deshret</h1>
+
+      <p>
+        Découvrez le contraste entre la terre cultivable
+        et le désert dans l'Égypte antique.
+      </p>
+
+    </header>
+
+    <!-- LES DEUX PAYSAGES -->
+    <div class="landscapes-grid">
+
+      @for (landscape of landscapes; track landscape.id) {
+
+        <button
+          type="button"
+          class="landscape-card"
+          [class.landscape-card--selected]="
+            selectedLandscape() === landscape.id
+          "
+          [class.landscape-card--kemet]="
+            landscape.id === 'kemet'
+          "
+          [class.landscape-card--deshret]="
+            landscape.id === 'deshret'
+          "
+          [attr.aria-pressed]="
+            selectedLandscape() === landscape.id
+          "
+          (click)="selectLandscape(landscape.id)"
+        >
+
+          <img
+            [src]="landscape.image"
+            [alt]="landscape.alt"
+            class="landscape-image"
+          />
+
+          <div class="landscape-card__content">
+
+            <h2>
+              {{ landscape.title }}
+              <span>— {{ landscape.subtitle }}</span>
+            </h2>
+
+            <p>{{ landscape.description }}</p>
+
+            <span class="landscape-card__status">
+              @if (isVisited(landscape.id)) {
+                ✓ Fiche consultée
+              } @else {
+                Cliquer pour découvrir →
+              }
+            </span>
+
+          </div>
+
+        </button>
+
+      }
+
+    </div>
+
+    <!-- FICHE SÉLECTIONNÉE -->
+    @if (selectedInfo(); as info) {
+
+      <div
+        class="detail-panel"
+        [class.detail-panel--kemet]="info.id === 'kemet'"
+        [class.detail-panel--deshret]="info.id === 'deshret'"
+      >
+
+        <span class="detail-panel__eyebrow">
+          FICHE DU PAYSAGE
+        </span>
+
+        <h2>
+          {{ info.title }} — {{ info.subtitle }}
+        </h2>
+
+        <p>{{ info.description }}</p>
+
+      </div>
+
+    }
+
+    <!-- TEXTE DE TRANSITION -->
+    <div class="transition-text">
+
+      <p>
+        « La vie se concentre dans la bande fertile du Nil,
+        tandis que le désert forme un environnement distinct,
+        à la fois contraignant et riche en ressources.
+        Cette opposition structure durablement
+        l’occupation du territoire. »
+      </p>
+
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="navigation">
+
+      <button
+        type="button"
+        class="back-button"
+        (click)="backRequested.emit()"
+      >
+        ← Retour à l'animation
+      </button>
+
+      @if (canContinue()) {
+
+        <button
+          type="button"
+          class="next-button"
+          (click)="continue()"
+        >
+          Continuer →
+        </button>
+
+      } @else {
+
+        <span class="navigation-hint">
+          Consultez les deux paysages pour continuer.
+        </span>
+
+      }
+
+    </div>
+
+  </div>
+
+</section>

@@ -1,0 +1,720 @@
+
+$background: #f7ecda;
+$surface: #fffaf1;
+$white: #ffffff;
+
+$text: #30251b;
+$text-muted: #795c44;
+
+$primary: #f2a12b;
+$primary-dark: #c87b13;
+
+$blue: #376aa4;
+$green: #2d8862;
+$orange: #ca840d;
+
+$border: #e4d1b5;
+
+:host {
+  display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.villes-page {
+  position: relative;
+  min-height: 100vh;
+  background: $background;
+  color: $text;
+  padding: 65px 35px 90px;
+  overflow: hidden;
+}
+
+.villes-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+/* DÉCORATIONS ÉGYPTIENNES */
+
+.egypt-decoration {
+  position: absolute;
+  color: #d8b476;
+  opacity: 0.4;
+  pointer-events: none;
+  font-size: 60px;
+}
+
+.decoration-top {
+  top: 55px;
+  right: 25px;
+}
+
+.decoration-bottom {
+  bottom: 130px;
+  left: 15px;
+}
+
+/* TITRES */
+
+.eyebrow {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #a65a24;
+  margin-bottom: 15px;
+}
+
+.page-heading {
+  margin-bottom: 35px;
+
+  h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(36px, 4vw, 62px);
+    line-height: 1.15;
+    margin: 0 0 25px;
+    color: $text;
+  }
+}
+
+.heading-description {
+  font-size: 19px;
+  line-height: 1.8;
+  color: $text-muted;
+  max-width: 1100px;
+}
+
+/* INTRODUCTION */
+
+.intro-banner {
+  background: $surface;
+  border-top: 6px solid $primary;
+  border-radius: 16px;
+  padding: 25px 30px;
+  margin-bottom: 35px;
+  box-shadow: 0 8px 25px rgba(90, 55, 15, 0.05);
+
+  h2 {
+    font-size: 26px;
+    margin: 0 0 10px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.6;
+    color: $text-muted;
+  }
+}
+
+/* CARTES DES TROIS VILLES */
+
+.cities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+}
+
+.city-card {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-7px);
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 245px;
+    object-fit: cover;
+    border: 3px dashed $primary;
+    border-radius: 13px;
+  }
+}
+
+.city-card__content {
+  margin-top: 12px;
+  padding: 22px 25px;
+  background: $white;
+  border-radius: 13px;
+  border-left: 7px solid $primary;
+
+  h3 {
+    margin: 0 0 8px;
+    font-size: 26px;
+    color: $text;
+  }
+
+  p {
+    margin: 0;
+    font-size: 19px;
+    color: $text-muted;
+  }
+}
+
+.city-card--blue {
+  img {
+    border-color: $blue;
+  }
+
+  .city-card__content {
+    border-color: $blue;
+  }
+}
+
+.city-card--green {
+  img {
+    border-color: $green;
+  }
+
+  .city-card__content {
+    border-color: $green;
+  }
+}
+
+.city-card--orange {
+  img {
+    border-color: $orange;
+  }
+
+  .city-card__content {
+    border-color: $orange;
+  }
+}
+
+/* TITRES DES ÉCRANS */
+
+.section-heading {
+  padding-left: 25px;
+  border-left: 7px solid $primary;
+  margin-bottom: 30px;
+
+  span {
+    font-size: 17px;
+    color: $text-muted;
+  }
+
+  h1 {
+    margin: 4px 0 0;
+    font-family: Georgia, serif;
+    font-size: clamp(32px, 3.5vw, 52px);
+    line-height: 1.15;
+  }
+}
+
+.heading-blue {
+  border-color: $blue;
+}
+
+.heading-green {
+  border-color: $green;
+}
+
+.heading-orange {
+  border-color: $orange;
+}
+
+.section-intro {
+  font-size: 20px;
+  color: $text-muted;
+  margin: 0 0 28px;
+}
+
+/* FRISE CHRONOLOGIQUE */
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 25px;
+  margin-top: 45px;
+}
+
+.timeline-item {
+  appearance: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px dashed $primary;
+  }
+}
+
+.timeline-dot {
+  width: 19px;
+  height: 19px;
+  background: $primary;
+  border-radius: 50%;
+  margin: 0 0 30px 12px;
+}
+
+.timeline-content {
+  background: $white;
+  border-radius: 13px;
+  border-top: 7px solid $primary;
+  margin-top: 12px;
+  padding: 20px 22px;
+  min-height: 155px;
+
+  h2 {
+    font-family: Georgia, serif;
+    font-size: 26px;
+    margin: 0 0 8px;
+    color: $primary-dark;
+  }
+
+  h3 {
+    font-size: 24px;
+    margin: 0 0 8px;
+  }
+
+  p {
+    margin: 0;
+    color: $text-muted;
+    font-size: 18px;
+  }
+}
+
+.timeline-item--blue {
+  .timeline-dot {
+    background: $blue;
+  }
+
+  img {
+    border-color: $blue;
+  }
+
+  .timeline-content {
+    border-color: $blue;
+
+    h2 {
+      color: $blue;
+    }
+  }
+}
+
+.timeline-item--green {
+  .timeline-dot {
+    background: $green;
+  }
+
+  img {
+    border-color: $green;
+  }
+
+  .timeline-content {
+    border-color: $green;
+
+    h2 {
+      color: $green;
+    }
+  }
+}
+
+.timeline-item--orange {
+  .timeline-dot {
+    background: $orange;
+  }
+
+  img {
+    border-color: $orange;
+  }
+
+  .timeline-content {
+    border-color: $orange;
+
+    h2 {
+      color: $orange;
+    }
+  }
+}
+
+.timeline-note {
+  margin-top: 30px;
+  font-size: 17px;
+  color: $text-muted;
+}
+
+/* DÉTAILS DES VILLES */
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
+  gap: 25px;
+  align-items: stretch;
+}
+
+.detail-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-card {
+  flex: 1;
+  background: $white;
+  padding: 22px 25px;
+  border-radius: 12px;
+  border-left: 7px solid $primary;
+  min-height: 130px;
+
+  h3 {
+    margin: 0 0 10px;
+    font-size: 23px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.5;
+    color: $text-muted;
+  }
+}
+
+.detail-card--blue {
+  border-color: $blue;
+}
+
+.detail-card--green {
+  border-color: $green;
+}
+
+.detail-card--orange {
+  border-color: $orange;
+}
+
+.detail-image {
+  min-height: 430px;
+  border: 3px dashed $primary;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ead9bc;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 430px;
+    object-fit: cover;
+  }
+}
+
+.detail-image--blue {
+  border-color: $blue;
+}
+
+.detail-image--green {
+  border-color: $green;
+}
+
+.detail-image--orange {
+  border-color: $orange;
+}
+
+/* NOTIONS */
+
+.notion {
+  margin-top: 22px;
+  padding: 20px 25px;
+  border-radius: 12px;
+  border: 2px dashed $primary;
+  background: #fff0cf;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.notion--blue {
+  border-color: $blue;
+  background: #e7f0fa;
+}
+
+.notion--green {
+  border-color: $green;
+  background: #e5f4e9;
+}
+
+.notion--orange {
+  border-color: $orange;
+  background: #fff0d2;
+}
+
+/* TABLEAU DE SYNTHÈSE */
+
+.comparison-table-wrapper {
+  overflow-x: auto;
+  border-radius: 12px;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: $white;
+  font-size: 17px;
+
+  th,
+  td {
+    padding: 18px;
+    border: 1px solid $border;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  th {
+    background: #f3e1c4;
+    font-weight: 800;
+  }
+
+  td:first-child {
+    font-weight: 700;
+    background: #fff5e5;
+  }
+
+  tr:hover td {
+    background: #fff9ee;
+  }
+}
+
+.text-blue {
+  color: $blue;
+}
+
+.text-green {
+  color: $green;
+}
+
+.text-orange {
+  color: $orange;
+}
+
+.synthesis-images {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+
+  img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px dashed $primary;
+  }
+
+  img:nth-child(1) {
+    border-color: $blue;
+  }
+
+  img:nth-child(2) {
+    border-color: $green;
+  }
+
+  img:nth-child(3) {
+    border-color: $orange;
+  }
+}
+
+/* CONCLUSION */
+
+.conclusion-banner {
+  background: $white;
+  border-top: 7px solid $primary;
+  border-radius: 14px;
+  padding: 28px;
+  font-size: 20px;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.conclusion-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 25px;
+}
+
+.conclusion-item {
+  img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
+  }
+}
+
+.conclusion-item__content {
+  background: $white;
+  margin-top: 12px;
+  border-left: 7px solid $primary;
+  border-radius: 12px;
+  padding: 22px;
+
+  h3 {
+    margin: 0 0 10px;
+    font-size: 23px;
+  }
+
+  p {
+    margin: 0;
+    color: $text-muted;
+    font-size: 18px;
+  }
+}
+
+.conclusion-item:nth-child(1) {
+  .conclusion-item__content {
+    border-color: $blue;
+  }
+}
+
+.conclusion-item:nth-child(2) {
+  .conclusion-item__content {
+    border-color: $green;
+  }
+}
+
+.conclusion-item:nth-child(3) {
+  .conclusion-item__content {
+    border-color: $orange;
+  }
+}
+
+/* NAVIGATION */
+
+.villes-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-top: 55px;
+  padding-top: 25px;
+  border-top: 1px solid $border;
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 14px 25px;
+  border-radius: 9px;
+  font-size: 17px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.btn-primary {
+  background: $primary;
+  color: #2b2116;
+  border: 2px solid $primary;
+
+  &:hover {
+    background: #e79013;
+    border-color: #e79013;
+    transform: translateY(-2px);
+  }
+}
+
+.btn-secondary {
+  background: transparent;
+  color: $text;
+  border: 2px solid #cdb38e;
+
+  &:hover {
+    background: #ead8bc;
+  }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+
+  .cities-grid,
+  .timeline,
+  .synthesis-images,
+  .conclusion-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-image,
+  .detail-image img {
+    min-height: 350px;
+    max-height: 500px;
+  }
+}
+
+@media (max-width: 650px) {
+
+  .villes-page {
+    padding: 35px 18px 60px;
+  }
+
+  .cities-grid,
+  .timeline,
+  .synthesis-images,
+  .conclusion-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .city-card img {
+    height: 220px;
+  }
+
+  .section-heading {
+    padding-left: 15px;
+  }
+
+  .section-heading h1 {
+    font-size: 31px;
+  }
+
+  .detail-card {
+    min-height: 110px;
+  }
+
+  .comparison-table {
+    min-width: 680px;
+  }
+
+  .villes-navigation {
+    flex-direction: column;
+
+    .btn-primary,
+    .btn-secondary {
+      width: 100%;
+    }
+  }
+
+  .egypt-decoration {
+    font-size: 35px;
+  }
+}

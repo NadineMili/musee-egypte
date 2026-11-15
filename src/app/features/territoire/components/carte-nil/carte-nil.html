@@ -1,0 +1,148 @@
+
+<section class="territory-map">
+
+  <div class="territory-map__container">
+
+    <!-- TITRE -->
+    <header class="heading">
+
+      <h1>
+        L'Égypte, un territoire façonné par le Nil
+      </h1>
+
+      <p>
+        Découvrez comment le Nil, les terres fertiles
+        et le désert ont organisé le territoire.
+      </p>
+
+    </header>
+
+    <!-- CARTE + INFORMATIONS -->
+    <div class="exploration">
+
+      <!-- PARTIE GAUCHE -->
+      <div class="map-panel">
+
+        <div class="egypt-map-container">
+
+          <!-- IMAGE DE LA CARTE -->
+          <img
+            class="egypt-map-image"
+            [src]="currentMapImage()"
+            [alt]="activeLayer().label"
+          />
+
+          <!-- BOUTON DE DÉCOUVERTE -->
+          @if (!nilDiscovered()) {
+
+            <button
+              type="button"
+              class="map-discovery-button"
+              (click)="discoverNil()"
+            >
+              <span aria-hidden="true">✦</span>
+              Découvrir le Nil
+              <span aria-hidden="true">→</span>
+            </button>
+
+          }
+
+        </div>
+
+        <!-- COUCHES INTERACTIVES -->
+        @if (nilDiscovered()) {
+
+          <div class="layers">
+
+            <h2>
+              Explorer les couches
+            </h2>
+
+            <div class="layers__buttons">
+
+              @for (layer of layers; track layer.id) {
+
+                <button
+                  type="button"
+                  [disabled]="!isVisible(layer.id)"
+                  [class.active]="selectedLayer() === layer.id"
+                  (click)="selectLayer(layer.id)"
+                >
+                  {{ layer.label }}
+                </button>
+
+              }
+
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+      <!-- PARTIE DROITE -->
+      <aside class="information">
+
+        <div class="information__content">
+
+          <span class="information__eyebrow">
+            DÉCOUVRIR LE TERRITOIRE
+          </span>
+
+          <h2>
+            {{ activeLayer().label }}
+          </h2>
+
+          <p>
+            {{ activeLayer().description }}
+          </p>
+
+          @if (!nilDiscovered()) {
+
+            <p class="information__hint">
+              Cliquez sur « Découvrir le Nil »
+              pour explorer progressivement
+              l'organisation du territoire.
+            </p>
+
+          } @else {
+
+            <p class="information__hint">
+              Sélectionnez une couche pour découvrir
+              son rôle dans l'Égypte antique.
+            </p>
+
+          }
+
+        </div>
+
+        <!-- BOUTONS DE NAVIGATION -->
+        <div class="information__actions">
+
+          <button
+            type="button"
+            class="back-button"
+            (click)="backRequested.emit()"
+          >
+            ← Retour
+          </button>
+
+          <button
+            type="button"
+            class="next-button"
+            [disabled]="!nilDiscovered() || isAnimating()"
+            (click)="goToAnimation()"
+          >
+            Voir l'animation →
+          </button>
+
+        </div>
+
+      </aside>
+
+    </div>
+
+  </div>
+
+</section>

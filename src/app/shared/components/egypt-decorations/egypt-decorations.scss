@@ -1,0 +1,108 @@
+
+:host {
+  display: block;
+  pointer-events: none;
+}
+
+.egypt-decorations {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.egypt-icon {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  opacity: 0.45;
+  pointer-events: none;
+  animation: egyptFloat 7s ease-in-out infinite;
+}
+
+/* Croix de vie */
+.ankh {
+  top: 25%;
+  left: 1.5%;
+  width: 45px;
+  animation-delay: 0s;
+}
+
+/* Œil d'Horus */
+.horus {
+  top: 44%;
+  right: 1.5%;
+  width: 55px;
+  animation-delay: -2s;
+}
+
+/* Scarabée */
+.scarab {
+  bottom: 20%;
+  left: 2%;
+  width: 42px;
+  animation-delay: -4s;
+}
+
+/* Fleur de lotus */
+.lotus {
+  top: 68%;
+  right: 2%;
+  width: 50px;
+  animation-delay: -1s;
+}
+
+/* Pyramide */
+.pyramid {
+  top: 13%;
+  right: 3%;
+  width: 42px;
+  animation-delay: -3s;
+}
+
+/* Deuxième croix */
+.ankh-second {
+  bottom: 7%;
+  right: 7%;
+  width: 30px;
+  opacity: 0.3;
+  animation-delay: -5s;
+}
+
+/* Animation douce */
+@keyframes egyptFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(3deg);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .egypt-icon {
+    width: 25px;
+    height: 25px;
+    opacity: 0.25;
+  }
+
+  .horus,
+  .lotus {
+    width: 30px;
+  }
+
+  .scarab,
+  .ankh-second {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .egypt-icon {
+    animation: none;
+  }
+}

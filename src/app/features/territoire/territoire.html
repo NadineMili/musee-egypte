@@ -1,0 +1,69 @@
+
+@switch (currentScreen()) {
+
+  <!-- ÉCRAN 1.0 : INTRODUCTION -->
+  @case ('introduction') {
+
+    <app-introduction
+      (explore)="goTo('carte')"
+    />
+
+  }
+
+  <!-- ÉCRAN 1.1 : CARTE INTERACTIVE DU NIL -->
+  @case ('carte') {
+
+    <app-carte-nil
+      (backRequested)="goTo('introduction')"
+      (animationRequested)="goTo('animation')"
+    />
+
+  }
+
+  <!-- ÉCRAN 1.2 : ANIMATION DU NIL -->
+  @case ('animation') {
+
+    <app-animation-nil
+      (backRequested)="goTo('carte')"
+      (nextRequested)="goTo('paysages')"
+    />
+
+  }
+
+  <!-- ÉCRAN 1.3 : KEMET ET DESHRET -->
+  @case ('paysages') {
+
+    <section class="next-screen">
+
+      <app-paysages
+        (backRequested)="goTo('animation')"
+        (nextRequested)="goTo('quiz')"
+      />
+
+    </section>
+
+  }
+
+  <!-- ÉCRAN 1.4 : QUIZ -->
+  @case ('quiz') {
+
+    <app-quiz-nil
+      (backRequested)="goTo('paysages')"
+      (nextRequested)="onQuizCompleted($event)"
+    />
+
+  }
+
+  <!-- ÉCRAN 1.5 : CONCLUSION -->
+  @case ('conclusion') {
+
+    <app-conclusion
+      [score]="quizScore()"
+      [totalQuestions]="3"
+      (reviewRequested)="goTo('carte')"
+      (nextRequested)="goToNextStep()"
+    />
+
+  }
+
+}

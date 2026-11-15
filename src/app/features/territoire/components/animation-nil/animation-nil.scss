@@ -1,0 +1,262 @@
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.animation-page {
+  min-height: calc(100vh - 90px);
+  padding: 45px 35px 65px;
+  background: #f6ecdc;
+}
+
+.animation-container {
+  max-width: 1350px;
+  margin: 0 auto;
+}
+
+.heading {
+  margin-bottom: 45px;
+
+  h1 {
+    margin: 0 0 18px;
+    color: #2b2118;
+    font-family: Georgia, serif;
+    font-size: clamp(30px, 3vw, 44px);
+  }
+
+  p {
+    margin: 0;
+    color: #6b5541;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+}
+
+.animation-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 30px;
+}
+
+.animation-card {
+  min-width: 0;
+  text-align: center;
+
+  h2 {
+    margin: 0 0 18px;
+    color: #302519;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+
+  p {
+    margin-top: 25px;
+    color: #5e5042;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+}
+
+.scene {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 9px;
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(60, 40, 20, 0.12);
+
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.scene--river {
+  background: #7cb2d3;
+}
+
+.scene--flood {
+  background: #a7d0e3;
+}
+
+.scene--fertile {
+  background: #9fc47e;
+}
+
+.scene--habitats {
+  background: #e3b18a;
+}
+
+.flood-layer,
+.fertile-layer,
+.agriculture-layer,
+.villages-layer {
+  opacity: 0;
+  transition: opacity 1.5s ease;
+
+  &.visible {
+    opacity: 1;
+  }
+}
+
+.phase-information {
+  margin-top: 50px;
+  padding: 25px 30px;
+  border: 1px solid #e1cdb0;
+  border-radius: 12px;
+  background: #fff8ee;
+
+  .phase-label {
+    display: block;
+    margin-bottom: 12px;
+    color: #a0522d;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+  }
+
+  h2 {
+    margin: 0 0 12px;
+    color: #2b2118;
+    font-family: Georgia, serif;
+    font-size: 25px;
+  }
+
+  p {
+    margin: 0;
+    color: #67513d;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+}
+
+.timeline {
+  margin-top: 30px;
+}
+
+.timeline-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #6b5541;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.progress-track {
+  height: 11px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #dfcfb8;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(
+      90deg,
+      #d99028,
+      #f0ad43
+  );
+}
+
+.animation-controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.control-button,
+.replay-button,
+.back-button,
+.next-button {
+  padding: 13px 22px;
+  border-radius: 7px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.control-button {
+  border: 1px solid #cbb69b;
+  background: #fff8ee;
+  color: #49331e;
+}
+
+.replay-button,
+.next-button {
+  border: none;
+  background: #f0a030;
+  color: #2b2118;
+
+  &:hover:not(:disabled) {
+    background: #e39120;
+  }
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 45px;
+}
+
+.back-button {
+  border: 1px solid #cbb69b;
+  background: transparent;
+  color: #49331e;
+}
+
+@media (max-width: 900px) {
+  .animation-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .animation-page {
+    padding: 30px 18px;
+  }
+
+  .animation-cards {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .animation-card {
+    max-width: 360px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .navigation {
+    flex-direction: column;
+  }
+
+  .navigation button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flood-layer,
+  .fertile-layer,
+  .agriculture-layer,
+  .villages-layer {
+    transition: none;
+  }
+}

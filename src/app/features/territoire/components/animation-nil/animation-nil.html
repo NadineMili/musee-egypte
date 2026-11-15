@@ -1,0 +1,301 @@
+
+<section class="animation-page">
+
+  <div class="animation-container">
+
+    <header class="heading">
+      <h1>Du fleuve au territoire habité</h1>
+      <p>
+        Les couches apparaissent progressivement
+        après la sélection du Nil.
+      </p>
+    </header>
+
+    <div class="animation-cards">
+
+      <!-- 1. LE FLEUVE -->
+      <article class="animation-card">
+
+        <h2>1 LE FLEUVE</h2>
+
+        <div class="scene scene--river">
+
+          <svg viewBox="0 0 200 150"
+               role="img"
+               aria-label="Le Nil traverse le désert">
+
+            <rect width="200" height="150"
+                  fill="#dfbf87" />
+
+            <path
+              d="M100 150 C70 120 125 100 95 75
+                 S80 30 110 0"
+              fill="none"
+              stroke="#2d94ca"
+              stroke-width="13"
+              stroke-linecap="round"
+              pathLength="100"
+              [attr.stroke-dasharray]="riverProgress() + ' 100'"
+            />
+
+          </svg>
+
+        </div>
+
+        <p>Le fleuve traverse<br>le désert.</p>
+
+      </article>
+
+      <!-- 2. LA CRUE -->
+      <article class="animation-card">
+
+        <h2>2 LA CRUE</h2>
+
+        <div class="scene scene--flood">
+
+          <svg viewBox="0 0 200 150"
+               role="img"
+               aria-label="La crue déborde sur la plaine">
+
+            <rect width="200" height="150"
+                  fill="#dfbf87" />
+
+            <path
+              d="M100 150 C70 120 125 100 95 75
+                 S80 30 110 0"
+              fill="none"
+              stroke="#2d94ca"
+              stroke-width="12"
+            />
+
+            <path
+              d="M100 150 C70 120 125 100 95 75
+                 S80 30 110 0"
+              fill="none"
+              stroke="#8ccce8"
+              stroke-width="65"
+              stroke-linecap="round"
+              class="flood-layer"
+              [class.visible]="elapsed() >= 3"
+            />
+
+            <path
+              d="M100 150 C70 120 125 100 95 75
+                 S80 30 110 0"
+              fill="none"
+              stroke="#2d94ca"
+              stroke-width="12"
+            />
+
+          </svg>
+
+        </div>
+
+        <p>L'eau déborde sur<br>la plaine.</p>
+
+      </article>
+
+      <!-- 3. LES TERRES -->
+      <article class="animation-card">
+
+        <h2>3 LES TERRES</h2>
+
+        <div class="scene scene--fertile">
+
+          <svg viewBox="0 0 200 150"
+               role="img"
+               aria-label="Les terres deviennent fertiles">
+
+            <rect width="200" height="150"
+                  fill="#dfbf87" />
+
+            <path
+              d="M100 150 C70 120 125 100 95 75
+                 S80 30 110 0"
+              fill="none"
+              stroke="#86b86e"
+              stroke-width="65"
+              stroke-linecap="round"
+              class="fertile-layer"
+              [class.visible]="elapsed() >= 6"
+            />
+
+            <path
+              d="M100 150 C70 120 125 100 95 75
+                 S80 30 110 0"
+              fill="none"
+              stroke="#2d94ca"
+              stroke-width="12"
+            />
+
+          </svg>
+
+        </div>
+
+        <p>Le limon enrichit<br>les sols.</p>
+
+      </article>
+
+      <!-- 4. LES HABITATS -->
+      <article class="animation-card">
+
+        <h2>4 LES HABITATS</h2>
+
+        <div class="scene scene--habitats">
+
+          <svg viewBox="0 0 200 150"
+               role="img"
+               aria-label="Champs, canaux et villages">
+
+            <rect width="200" height="150"
+                  fill="#dfbf87" />
+
+            <path
+              d="M100 150 C70 120 125 100 95 75
+                 S80 30 110 0"
+              fill="none"
+              stroke="#86b86e"
+              stroke-width="65"
+              stroke-linecap="round"
+              [class.visible]="elapsed() >= 6"
+              class="fertile-layer"
+            />
+
+            <!-- CHAMPS ET CANAUX -->
+            <g class="agriculture-layer"
+               [class.visible]="elapsed() >= 9">
+
+              <rect x="35" y="40" width="28" height="25"
+                    fill="#5b9749" />
+
+              <rect x="140" y="75" width="25" height="30"
+                    fill="#5b9749" />
+
+              <rect x="40" y="105" width="26" height="20"
+                    fill="#76a94d" />
+
+              <path
+                d="M65 40 L85 60 M130 90 L145 90
+                   M65 115 L90 110"
+                fill="none"
+                stroke="#6bc0e0"
+                stroke-width="4"
+              />
+
+            </g>
+
+            <!-- NIL -->
+            <path
+              d="M100 150 C70 120 125 100 95 75
+                 S80 30 110 0"
+              fill="none"
+              stroke="#2d94ca"
+              stroke-width="12"
+            />
+
+            <!-- VILLAGES -->
+            <g class="villages-layer"
+               [class.visible]="elapsed() >= 12">
+
+              <g transform="translate(45 15)">
+                <rect x="0" y="10" width="20" height="17"
+                      fill="#b87543" />
+                <path d="M-3 10 L10 0 L23 10 Z"
+                      fill="#92512f" />
+              </g>
+
+              <g transform="translate(145 112)">
+                <rect x="0" y="10" width="20" height="17"
+                      fill="#b87543" />
+                <path d="M-3 10 L10 0 L23 10 Z"
+                      fill="#92512f" />
+              </g>
+
+            </g>
+
+          </svg>
+
+        </div>
+
+        <p>
+          Les villages se concentrent près<br>
+          des terres cultivées.
+        </p>
+
+      </article>
+
+    </div>
+
+
+
+    <!-- PROGRESSION -->
+    <div class="timeline">
+
+      <div class="timeline-labels">
+        <span>{{ formatTime(elapsed()) }}</span>
+        <span>15 s</span>
+      </div>
+
+      <div
+        class="progress-track"
+        role="progressbar"
+        aria-label="Progression de l'animation"
+        [attr.aria-valuenow]="elapsed()"
+        aria-valuemin="0"
+        aria-valuemax="15"
+      >
+        <div
+          class="progress-fill"
+          [style.width.%]="progress()"
+        ></div>
+      </div>
+
+    </div>
+
+    <!-- COMMANDES -->
+    <div class="animation-controls">
+
+      <button
+        type="button"
+        class="control-button"
+        [disabled]="completed()"
+        (click)="togglePlayback()"
+      >
+        {{ playing() ? '⏸ Pause' : '▶ Lecture' }}
+      </button>
+
+      <button
+        type="button"
+        class="replay-button"
+        (click)="replay()"
+      >
+        ↻ Revoir l'animation
+      </button>
+
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="navigation">
+
+      <button
+        type="button"
+        class="back-button"
+        (click)="backRequested.emit()"
+      >
+        ← Retour
+      </button>
+
+      <button
+        type="button"
+        class="next-button"
+        [disabled]="!completed()"
+        (click)="nextRequested.emit()"
+      >
+        Continuer →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>

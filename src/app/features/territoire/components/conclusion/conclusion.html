@@ -1,0 +1,108 @@
+
+<section class="conclusion-page">
+
+  <div class="conclusion-container">
+
+    <header class="conclusion-heading">
+      <span class="eyebrow">ÉTAPE 1 — TERRITOIRE</span>
+
+      <h1>Le Nil, à l'origine des villes</h1>
+
+      <p>
+        Vous avez découvert comment la géographie
+        de l'Égypte antique a favorisé
+        le développement des premières villes.
+      </p>
+    </header>
+
+    <div class="conclusion-card">
+
+      <span class="conclusion-card__eyebrow">
+        CE QU'IL FAUT RETENIR
+      </span>
+
+      <h2 class="conclusion-chain">
+        <span>GÉOGRAPHIE</span>
+        <span class="arrow">→</span>
+        <span>RESSOURCES</span>
+        <span class="arrow">→</span>
+        <span>AGRICULTURE</span>
+        <span class="arrow">→</span>
+        <span>IMPLANTATIONS HUMAINES</span>
+        <span class="arrow">→</span>
+        <span>URBANISATION</span>
+      </h2>
+
+      <p class="conclusion-intro">
+        Le Nil structure l'espace habitable
+        et prépare l'émergence des villes.
+      </p>
+
+      <div class="conclusion-divider"></div>
+
+      <div class="conclusion-synthesis">
+
+        <h3>Synthèse</h3>
+
+        <p>
+          Le Nil structure l’espace habitable.
+          Dans un environnement largement désertique,
+          il apporte l’eau, façonne une vallée et un delta fertiles,
+          favorise l’agriculture et soutient la concentration
+          des populations.
+        </p>
+
+        <p>
+          Ces conditions territoriales préparent
+          le développement des établissements humains
+          et, progressivement, des villes.
+        </p>
+
+      </div>
+
+      <div class="quiz-result">
+
+        <div>
+          <span class="quiz-result__label">
+            VOTRE SCORE AU QUIZ
+          </span>
+
+          <p>
+            Vous avez terminé les trois questions
+            sur le rôle du Nil.
+          </p>
+        </div>
+
+        <div class="quiz-result__score">
+          {{ score() }}
+          <span>/ {{ totalQuestions() }}</span>
+        </div>
+
+      </div>
+
+      <div class="conclusion-actions">
+
+        <button
+          type="button"
+          class="next-button"
+          (click)="nextRequested.emit()"
+        >
+          Découvrir les villes
+          <span aria-hidden="true">→</span>
+        </button>
+
+        <button
+          type="button"
+          class="review-button"
+          (click)="reviewRequested.emit()"
+        >
+          ↻ Revoir l'étape
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

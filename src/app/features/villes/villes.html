@@ -1,0 +1,470 @@
+
+<section class="villes-page">
+
+  <div class="egypt-decoration decoration-top">𓂀</div>
+  <div class="egypt-decoration decoration-bottom">𓆣</div>
+
+  <div class="villes-container">
+
+    @switch (currentScreen()) {
+
+      <!-- ACCUEIL -->
+      @case ('accueil') {
+
+        <header class="page-heading">
+          <span class="eyebrow">ÉTAPE 2 SUR 5</span>
+
+          <h1>
+            La naissance et l’évolution des villes
+          </h1>
+
+          <p class="heading-description">
+            Grâce aux ressources du Nil, les populations
+            se sont progressivement regroupées dans des villes.
+            Certaines deviennent des centres de pouvoir,
+            d'autres des centres religieux ou des capitales planifiées.
+          </p>
+        </header>
+
+        <div class="intro-banner">
+          <h2>Trois villes, trois organisations</h2>
+
+          <p>
+            Comment pouvoir, religion, économie et société
+            ont façonné les villes égyptiennes.
+          </p>
+        </div>
+
+        <div class="cities-grid">
+
+          @for (ville of villes; track ville.id) {
+
+            <button
+              type="button"
+              class="city-card"
+              [class.city-card--blue]="ville.id === 'memphis'"
+              [class.city-card--green]="ville.id === 'thebes'"
+              [class.city-card--orange]="ville.id === 'amarna'"
+              (click)="goTo(ville.id)"
+            >
+
+              <img
+                [src]="ville.image"
+                [alt]="'Vue de ' + ville.nom"
+              />
+
+              <div class="city-card__content">
+                <h3>{{ ville.nom }}</h3>
+                <p>{{ ville.sousTitre }}</p>
+              </div>
+
+            </button>
+
+          }
+
+        </div>
+
+      }
+
+      <!-- 1 : FRISE -->
+      @case ('frise') {
+
+        <header class="section-heading">
+          <span>Étape 2 · Écran 1 sur 6</span>
+          <h1>Frise chronologique</h1>
+        </header>
+
+        <div class="timeline">
+
+          @for (ville of villes; track ville.id) {
+
+            <button
+              type="button"
+              class="timeline-item"
+              [class.timeline-item--blue]="ville.id === 'memphis'"
+              [class.timeline-item--green]="ville.id === 'thebes'"
+              [class.timeline-item--orange]="ville.id === 'amarna'"
+              (click)="goTo(ville.id)"
+            >
+
+              <div class="timeline-dot"></div>
+
+              <img
+                [src]="ville.image"
+                [alt]="ville.nom"
+              />
+
+              <div class="timeline-content">
+                <h2>{{ ville.date }}</h2>
+                <h3>{{ ville.nom }}</h3>
+                <p>{{ ville.description }}</p>
+              </div>
+
+            </button>
+
+          }
+
+        </div>
+
+        <p class="timeline-note">
+          Dates approximatives, variables selon les chronologies.
+        </p>
+
+      }
+
+      <!-- 2 : MEMPHIS -->
+      @case ('memphis') {
+
+        <header class="section-heading heading-blue">
+          <span>Étape 2 · Écran 2 sur 6</span>
+          <h1>Memphis, la ville du pouvoir</h1>
+        </header>
+
+        <p class="section-intro">
+          Capitale née de l’unification, vers 3100 av. J.-C.
+        </p>
+
+        <div class="detail-layout">
+
+          <div class="detail-cards">
+
+            <article class="detail-card detail-card--blue">
+              <h3>Position</h3>
+              <p>Entre la vallée du Nil et le delta.</p>
+            </article>
+
+            <article class="detail-card detail-card--blue">
+              <h3>Fonctions</h3>
+              <p>Pouvoir, administration, commerce.</p>
+            </article>
+
+            <article class="detail-card detail-card--blue">
+              <h3>Religion et mort</h3>
+              <p>Temple de Ptah, nécropoles de Saqqarah.</p>
+            </article>
+
+          </div>
+
+          <div class="detail-image detail-image--blue">
+            <img
+              src="/images/territoire/aa.jpg"
+              alt="Illustration de Memphis"
+            />
+          </div>
+
+        </div>
+
+        <div class="notion notion--blue">
+          <strong>Notion — Centralité :</strong>
+          la capitale concentre décision et échanges.
+        </div>
+
+      }
+
+      <!-- 3 : THÈBES -->
+      @case ('thebes') {
+
+        <header class="section-heading heading-green">
+          <span>Étape 2 · Écran 3 sur 6</span>
+          <h1>Thèbes, la ville des dieux</h1>
+        </header>
+
+        <p class="section-intro">
+          Apogée au Nouvel Empire, de 1550 à 1070 av. J.-C.
+        </p>
+
+        <div class="detail-layout">
+
+          <div class="detail-cards">
+
+            <article class="detail-card detail-card--green">
+              <h3>Rive est</h3>
+              <p>Les vivants : Karnak et Louxor.</p>
+            </article>
+
+            <article class="detail-card detail-card--green">
+              <h3>Rive ouest</h3>
+              <p>Les morts : Vallée des Rois.</p>
+            </article>
+
+            <article class="detail-card detail-card--green">
+              <h3>Karnak</h3>
+              <p>Du pylône au sanctuaire, toujours plus sacré.</p>
+            </article>
+
+          </div>
+
+          <div class="detail-image detail-image--green">
+            <img
+              src="/images/territoire/bb.jpg"
+              alt="Illustration de Thèbes"
+            />
+          </div>
+
+        </div>
+
+        <div class="notion notion--green">
+          <strong>Notion — Monumentalité :</strong>
+          l’architecture exprime la puissance divine.
+        </div>
+
+      }
+
+      <!-- 4 : AMARNA -->
+      @case ('amarna') {
+
+        <header class="section-heading heading-orange">
+          <span>Étape 2 · Écran 4 sur 6</span>
+          <h1>Amarna, la ville créée par un pharaon</h1>
+        </header>
+
+        <p class="section-intro">
+          Capitale fondée vers 1346 av. J.-C. par Akhenaton.
+        </p>
+
+        <div class="detail-layout">
+
+          <div class="detail-cards">
+
+            <article class="detail-card detail-card--orange">
+              <h3>Aton</h3>
+              <p>Culte du disque solaire.</p>
+            </article>
+
+            <article class="detail-card detail-card--orange">
+              <h3>Plan</h3>
+              <p>Palais, temples, quartiers, artisans.</p>
+            </article>
+
+            <article class="detail-card detail-card--orange">
+              <h3>Temples ouverts</h3>
+              <p>Cours et autels exposés à la lumière.</p>
+            </article>
+
+          </div>
+
+          <div class="detail-image detail-image--orange">
+            <img
+              src="/images/territoire/cc.jpg"
+              alt="Illustration d'Amarna"
+            />
+          </div>
+
+        </div>
+
+        <div class="notion notion--orange">
+          <strong>Notion — Planification :</strong>
+          une ville voulue par le roi, abandonnée après lui.
+        </div>
+
+      }
+
+      <!-- 5 : SYNTHÈSE -->
+      @case ('synthese') {
+
+        <header class="section-heading">
+          <span>Étape 2 · Écran 5 sur 6</span>
+          <h1>Trois villes, trois modèles urbains</h1>
+        </header>
+
+        <div class="comparison-table-wrapper">
+
+          <table class="comparison-table">
+
+            <thead>
+            <tr>
+              <th>Critère</th>
+              <th class="text-blue">Memphis</th>
+              <th class="text-green">Thèbes</th>
+              <th class="text-orange">Amarna</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+              <td>Modèle</td>
+              <td>Ville du pouvoir</td>
+              <td>Ville religieuse</td>
+              <td>Ville planifiée</td>
+            </tr>
+
+            <tr>
+              <td>Fonction</td>
+              <td>Politique</td>
+              <td>Religieuse</td>
+              <td>Idéologique</td>
+            </tr>
+
+            <tr>
+              <td>Notion</td>
+              <td>Centralité</td>
+              <td>Monumentalité</td>
+              <td>Planification</td>
+            </tr>
+
+            <tr>
+              <td>Évolution</td>
+              <td>Plusieurs siècles</td>
+              <td>Apogée au Nouvel Empire</td>
+              <td>Capitale éphémère</td>
+            </tr>
+            </tbody>
+
+          </table>
+
+        </div>
+
+
+      <div class="synthesis-images">
+
+        <div class="synthesis-image">
+          <img
+            src="images/territoire/Memphis5.jpg"
+            alt="Memphis"
+            loading="eager"
+            (error)="imageError($event)"
+          />
+        </div>
+
+        <div class="synthesis-image">
+          <img
+            src="images/territoire/Thebes5.jpg"
+            alt="Thèbes"
+            loading="eager"
+            (error)="imageError($event)"
+          />
+        </div>
+
+        <div class="synthesis-image">
+          <img
+            src="images/territoire/Amarna5.jpg"
+            alt="Amarna"
+            loading="eager"
+            (error)="imageError($event)"
+          />
+        </div>
+
+      </div>
+
+
+    }
+
+      <!-- 6 : CONCLUSION -->
+      @case ('conclusion') {
+
+        <header class="section-heading">
+          <span>Étape 2 · Écran 6 sur 6</span>
+          <h1>Conclusion de l’étape</h1>
+        </header>
+
+        <div class="conclusion-banner">
+          Le pouvoir, la religion et la société façonnent
+          la ville. Étape suivante : l’architecture
+          et les monuments.
+        </div>
+
+        <div class="conclusion-grid">
+
+          <article class="conclusion-item">
+
+            <img
+              src="/images/territoire/centralise.jpg"
+              alt="Memphis"
+            />
+
+            <div class="conclusion-item__content">
+              <h3>Centralité</h3>
+              <p>Commander le territoire.</p>
+            </div>
+
+          </article>
+
+          <article class="conclusion-item">
+
+            <img
+              src="/images/territoire/monumentalité.jpg"
+              alt="Thèbes"
+            />
+
+            <div class="conclusion-item__content">
+              <h3>Monumentalité</h3>
+              <p>Structurer par le sacré.</p>
+            </div>
+
+          </article>
+
+          <article class="conclusion-item">
+
+            <img
+              src="/images/territoire/planification.jpg"
+              alt="Amarna"
+            />
+
+            <div class="conclusion-item__content">
+              <h3>Planification</h3>
+              <p>Matérialiser une idéologie.</p>
+            </div>
+
+          </article>
+
+        </div>
+
+      }
+
+    }
+
+    <!-- NAVIGATION EN BAS -->
+
+    <div class="villes-navigation">
+
+      @if (currentScreen() === 'accueil') {
+
+        <a
+          routerLink="/etape-1"
+          class="btn-secondary"
+        >
+          ← Retour à l’étape 1
+        </a>
+
+      } @else {
+
+        <button
+          type="button"
+          class="btn-secondary"
+          (click)="previous()"
+        >
+          ← Précédent
+        </button>
+
+      }
+
+      @if (currentScreen() === 'conclusion') {
+
+        <a
+          routerLink="/etape-3"
+          class="btn-primary"
+        >
+          Découvrir l’étape 3 →
+        </a>
+
+      } @else {
+
+        <button
+          type="button"
+          class="btn-primary"
+          (click)="next()"
+        >
+          @if (currentScreen() === 'accueil') {
+            Découvrir la frise →
+          } @else {
+            Suivant →
+          }
+        </button>
+
+      }
+
+    </div>
+
+  </div>
+
+</section>

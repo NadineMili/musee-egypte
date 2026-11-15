@@ -1,0 +1,385 @@
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* PAGE PRINCIPALE */
+
+.territory-map {
+  width: 100%;
+  min-height: calc(100vh - 90px);
+  padding: 45px 35px 65px;
+  background: #f6ecdc;
+}
+
+.territory-map__container {
+  width: 100%;
+  max-width: 1350px;
+  margin: 0 auto;
+}
+
+/* TITRE */
+
+.heading {
+  margin-bottom: 35px;
+
+  h1 {
+    margin: 0 0 15px;
+    color: #2b2118;
+    font-family: Georgia, serif;
+    font-size: clamp(30px, 3vw, 44px);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  p {
+    margin: 0;
+    color: #6b5541;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+}
+
+/* DISPOSITION EN DEUX COLONNES */
+
+.exploration {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 0.85fr);
+  align-items: start;
+  gap: 50px;
+}
+
+.map-panel {
+  min-width: 0;
+  width: 100%;
+}
+
+/* CONTENEUR DE LA CARTE */
+
+.egypt-map-container {
+  position: relative;
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #dfbf87;
+
+  box-shadow:
+    0 15px 35px rgba(43, 33, 24, 0.15);
+}
+
+/* IMAGE */
+
+.egypt-map-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* BOUTON DÉCOUVRIR LE NIL */
+
+.map-discovery-button {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-width: 210px;
+  padding: 15px 25px;
+
+  background: linear-gradient(
+      135deg,
+      #f6bd60,
+      #e89b2e
+  );
+
+  border: 1px solid #d38a20;
+  border-radius: 50px;
+
+  color: #382514;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+
+  cursor: pointer;
+  z-index: 10;
+
+  box-shadow:
+    0 8px 24px rgba(67, 42, 18, 0.25);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+
+  &:hover {
+    background: linear-gradient(
+        135deg,
+        #ffd17a,
+        #eda332
+    );
+
+    transform:
+      translateX(-50%) translateY(-3px);
+
+    box-shadow:
+      0 12px 28px rgba(67, 42, 18, 0.3);
+  }
+
+  &:active {
+    transform:
+      translateX(-50%) scale(0.97);
+  }
+
+  &:focus-visible {
+    outline: 3px solid #49331e;
+    outline-offset: 3px;
+  }
+}
+
+/* EXPLORATION DES COUCHES */
+
+.layers {
+  margin-top: 25px;
+
+  h2 {
+    margin: 0 0 15px;
+    color: #2b2118;
+    font-size: 20px;
+    font-weight: 700;
+  }
+}
+
+.layers__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  button {
+    padding: 11px 15px;
+
+    border: 1px solid #d3bfa5;
+    border-radius: 7px;
+
+    background: #fff8ee;
+    color: #49331e;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease;
+
+    &:hover:not(:disabled) {
+      background: #f5e4cb;
+    }
+
+    &.active {
+      background: #f0a030;
+      border-color: #f0a030;
+      color: #2b2118;
+      font-weight: 700;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+}
+
+/* PANNEAU D'INFORMATIONS */
+
+.information {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 550px;
+
+  padding: 20px 0;
+}
+
+.information__content {
+  h2 {
+    margin: 0 0 20px;
+
+    color: #2b2118;
+    font-family: Georgia, serif;
+    font-size: clamp(26px, 2.5vw, 36px);
+    line-height: 1.25;
+  }
+
+  p {
+    margin: 0 0 20px;
+
+    color: #5e5042;
+    font-size: 17px;
+    line-height: 1.8;
+  }
+}
+
+.information__eyebrow {
+  display: block;
+  margin-bottom: 25px;
+
+  color: #a0522d;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.information__hint {
+  margin-top: 25px !important;
+  color: #8a765e !important;
+  font-style: italic;
+}
+
+/* BOUTONS DE NAVIGATION */
+
+.information__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+
+  margin-top: auto;
+  padding-top: 35px;
+}
+
+.back-button,
+.next-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px 22px;
+
+  border-radius: 7px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-button {
+  border: 1px solid #cbb69b;
+  background: transparent;
+  color: #49331e;
+
+  &:hover {
+    background: #eadcc8;
+  }
+}
+
+.next-button {
+  border: none;
+  background: #f0a030;
+  color: #2b2118;
+
+  &:hover:not(:disabled) {
+    background: #e39120;
+    transform: translateY(-2px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+/* TABLETTES */
+
+@media (max-width: 900px) {
+  .territory-map {
+    padding: 35px 25px 50px;
+  }
+
+  .exploration {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .egypt-map-container {
+    max-width: 550px;
+  }
+
+  .information {
+    min-height: 0;
+  }
+}
+
+/* TÉLÉPHONES */
+
+@media (max-width: 480px) {
+  .territory-map {
+    padding: 30px 18px;
+  }
+
+  .heading {
+    margin-bottom: 25px;
+
+    h1 {
+      font-size: 28px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+
+  .egypt-map-container {
+    max-width: 100%;
+  }
+
+  .map-discovery-button {
+    bottom: 18px;
+    min-width: 185px;
+    padding: 12px 18px;
+    font-size: 14px;
+  }
+
+  .information {
+    padding: 10px 0;
+  }
+
+  .information__actions {
+    flex-direction: column;
+  }
+
+  .back-button,
+  .next-button {
+    width: 100%;
+  }
+}
+
+/* ACCESSIBILITÉ */
+
+@media (prefers-reduced-motion: reduce) {
+  .map-discovery-button,
+  .back-button,
+  .next-button,
+  .layers__buttons button {
+    transition: none;
+  }
+}

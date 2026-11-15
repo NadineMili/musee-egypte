@@ -1,0 +1,174 @@
+
+<section class="quiz-page">
+  <div class="quiz-container">
+
+    <header class="quiz-heading">
+      <span class="quiz-heading__eyebrow">
+        ÉTAPE 1 — TERRITOIRE
+      </span>
+
+      <h1>Vérifie ce que tu as compris</h1>
+
+      <p>
+        Teste tes connaissances sur le rôle du Nil
+        dans l'organisation du territoire égyptien.
+      </p>
+    </header>
+
+    @if (!finished()) {
+
+      <div class="quiz-card">
+
+        <div class="quiz-progress">
+          <span>
+            QUESTION {{ currentIndex() + 1 }}
+            SUR {{ questions.length }}
+          </span>
+
+          <span>
+            {{ Math.round(progress()) }} %
+          </span>
+        </div>
+
+        <div class="progress-bar">
+          <div
+            class="progress-bar__fill"
+            [style.width.%]="progress()"
+          ></div>
+        </div>
+
+        <h2 class="quiz-question">
+          {{ currentQuestion().question }}
+        </h2>
+
+        <div class="quiz-answers">
+          @for (
+              answer of currentQuestion().answers;
+            track $index
+            ) {
+            <button
+              type="button"
+              class="answer-button"
+              [class.answer-button--selected]="
+                selectedAnswer() === $index
+              "
+              [class.answer-button--correct]="
+                answered() &&
+                $index === currentQuestion().correctAnswer
+              "
+              [class.answer-button--wrong]="
+                answered() &&
+                selectedAnswer() === $index &&
+                !isCorrect()
+              "
+              [disabled]="answered()"
+              (click)="selectAnswer($index)"
+            >
+              <span>{{ answer }}</span>
+
+              @if (
+                answered() &&
+                $index === currentQuestion().correctAnswer
+                ) {
+                <span aria-hidden="true">✓</span>
+              }
+
+              @if (
+                answered() &&
+                selectedAnswer() === $index &&
+                !isCorrect()
+                ) {
+                <span aria-hidden="true">✕</span>
+              }
+            </button>
+          }
+        </div>
+
+        @if (answered()) {
+          <div
+            class="quiz-feedback"
+            [class.quiz-feedback--correct]="isCorrect()"
+            [class.quiz-feedback--wrong]="!isCorrect()"
+            role="status"
+          >
+            <strong>
+              {{ isCorrect() ? 'Bonne réponse !' : 'Pas tout à fait !' }}
+            </strong>
+
+            <p>{{ currentQuestion().explanation }}</p>
+          </div>
+
+          <button
+            type="button"
+            class="next-button"
+            (click)="nextQuestion()"
+          >
+            @if (currentIndex() === questions.length - 1) {
+              Voir mon résultat →
+            } @else {
+              Question suivante →
+            }
+          </button>
+        }
+
+      </div>
+
+    } @else {
+
+      <div class="result-card">
+        <span class="result-card__eyebrow">
+          QUIZ TERMINÉ
+        </span>
+
+        <h2>Bravo pour ta participation !</h2>
+
+        <div class="result-score">
+          {{ score() }} / {{ questions.length }}
+        </div>
+
+        @if (score() === questions.length) {
+          <p>
+            Excellent ! Tu as parfaitement compris
+            le rôle du Nil dans l'Égypte antique.
+          </p>
+        } @else {
+          <p>
+            Tu as découvert comment le Nil,
+            l'agriculture et les implantations humaines
+            sont liés.
+          </p>
+        }
+
+        <div class="result-actions">
+          <button
+            type="button"
+            class="back-button"
+            (click)="restartQuiz()"
+          >
+            ↻ Refaire le quiz
+          </button>
+
+          <button
+            type="button"
+            class="next-button"
+            (click)="continue()"
+          >
+            Continuer →
+          </button>
+        </div>
+      </div>
+
+    }
+
+    <div class="quiz-navigation">
+      <button
+        type="button"
+        class="back-button"
+        (click)="backRequested.emit()"
+      >
+        ← Retour aux paysages
+      </button>
+    </div>
+
+  </div>
+</section>

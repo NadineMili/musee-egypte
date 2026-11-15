@@ -1,0 +1,101 @@
+
+<section class="villes-intro">
+
+  <div class="intro-container">
+
+    <header class="intro-heading">
+      <span class="eyebrow">ÉTAPE 2 SUR 5</span>
+
+      <h1>La naissance et l'évolution des villes</h1>
+
+      <p class="intro-question">
+        « Comment le pouvoir, la religion, l'économie
+        et la société ont-ils façonné les villes égyptiennes ? »
+      </p>
+
+      <p class="intro-description">
+        Dans l'Égypte antique, les villes se développent
+        autour de fonctions différentes. Certaines
+        concentrent le pouvoir, d'autres deviennent
+        de grands centres religieux ou sont créées
+        selon la volonté d'un pharaon.
+      </p>
+    </header>
+
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">DÉCOUVRIR LES CITÉS</span>
+        <h2>Trois villes, trois organisations</h2>
+      </div>
+
+      <p>
+        Sélectionnez une ville pour découvrir
+        son histoire et son organisation.
+      </p>
+    </div>
+
+    <div class="cities-grid">
+
+      @for (city of cities; track city.id) {
+        <button
+          type="button"
+          class="city-card"
+          [class.city-card--memphis]="city.id === 'memphis'"
+          [class.city-card--thebes]="city.id === 'thebes'"
+          [class.city-card--amarna]="city.id === 'amarna'"
+          (click)="cityRequested.emit(city.id)"
+        >
+
+          <div class="city-visual">
+            <span class="city-sun" aria-hidden="true"></span>
+            <span class="city-symbol" aria-hidden="true">
+              {{ city.icon }}
+            </span>
+
+            <div class="city-monuments" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+
+          <div class="city-content">
+            <span class="city-period">{{ city.period }}</span>
+
+            <h3>{{ city.name }}</h3>
+
+            <strong>{{ city.subtitle }}</strong>
+
+            <p>{{ city.description }}</p>
+
+            <span class="city-link">
+              Explorer cette ville
+              <span aria-hidden="true">→</span>
+            </span>
+          </div>
+
+        </button>
+      }
+
+    </div>
+
+    <div class="intro-bottom">
+      <p>
+        <span aria-hidden="true">✦</span>
+        Un voyage à travers l'histoire des villes
+        de l'Égypte antique.
+      </p>
+
+      <button
+        type="button"
+        class="start-button"
+        (click)="startRequested.emit()"
+      >
+        Commencer l'exploration
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
+
+  </div>
+
+</section>

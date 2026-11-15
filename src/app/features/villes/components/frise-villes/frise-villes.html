@@ -1,0 +1,99 @@
+
+<section class="timeline-page">
+
+  <div class="timeline-container">
+
+    <!-- EN-TÊTE -->
+    <header class="timeline-heading">
+      <span class="eyebrow">
+        ÉTAPE 2 — LES VILLES
+      </span>
+
+      <h1>Frise chronologique</h1>
+
+      <p>
+        Découvrez comment les grandes villes de l'Égypte
+        antique ont évolué au fil des siècles.
+      </p>
+    </header>
+
+    <!-- FRISE -->
+    <div class="timeline">
+
+      <div class="timeline-line" aria-hidden="true"></div>
+
+      <div class="timeline-grid">
+
+        @for (city of cities; track city.id) {
+
+          <article
+            class="timeline-city"
+            [class.timeline-city--memphis]="city.id === 'memphis'"
+            [class.timeline-city--thebes]="city.id === 'thebes'"
+            [class.timeline-city--amarna]="city.id === 'amarna'"
+          >
+
+            <!-- POINT CHRONOLOGIQUE -->
+            <div class="timeline-marker">
+              <span class="timeline-dot"></span>
+            </div>
+
+            <!-- IMAGE -->
+            <div class="city-image-wrapper">
+              <img
+                class="city-image"
+                [src]="city.image"
+                [alt]="city.alt"
+                loading="lazy"
+              />
+            </div>
+
+            <!-- INFORMATIONS -->
+            <div class="city-info">
+
+              <span class="city-period">
+                {{ city.period }}
+              </span>
+
+              <h2>{{ city.name }}</h2>
+
+              <p>{{ city.description }}</p>
+
+            </div>
+
+          </article>
+
+        }
+
+      </div>
+    </div>
+
+    <!-- NOTE -->
+    <p class="timeline-note">
+      Dates approximatives, variables selon les chronologies.
+    </p>
+
+    <!-- NAVIGATION -->
+    <div class="timeline-navigation">
+
+      <button
+        type="button"
+        class="back-button"
+        (click)="backRequested.emit()"
+      >
+        ← Retour
+      </button>
+
+      <button
+        type="button"
+        class="next-button"
+        (click)="nextRequested.emit()"
+      >
+        Continuer →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>

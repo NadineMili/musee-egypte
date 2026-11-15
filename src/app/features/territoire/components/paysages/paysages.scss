@@ -1,0 +1,310 @@
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.landscapes-page {
+  min-height: calc(100vh - 90px);
+  padding: 45px 35px 65px;
+  background: #f6ecdc;
+}
+
+.landscapes-container {
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+/* TITRE */
+
+.heading {
+  margin-bottom: 40px;
+
+  h1 {
+    margin: 0 0 18px;
+    color: #2b2118;
+    font-family: Georgia, serif;
+    font-size: clamp(30px, 3vw, 44px);
+    line-height: 1.2;
+  }
+
+  p {
+    margin: 0;
+    color: #6b5541;
+    font-size: 17px;
+    line-height: 1.7;
+  }
+}
+
+/* DEUX CARTES */
+
+.landscapes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 25px;
+  align-items: start;
+}
+
+.landscape-card {
+  display: block;
+  width: 100%;
+  padding: 18px;
+
+  border: 3px solid transparent;
+  border-radius: 12px;
+
+  color: #2b2118;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(43, 33, 24, 0.14);
+  }
+
+  &:focus-visible {
+    outline: 3px solid #49331e;
+    outline-offset: 4px;
+  }
+}
+
+.landscape-card--kemet {
+  background: #e2ead7;
+
+  &.landscape-card--selected {
+    border-color: #6d994f;
+    box-shadow: 0 10px 28px rgba(78, 125, 52, 0.2);
+  }
+}
+
+.landscape-card--deshret {
+  background: #f5dfc1;
+
+  &.landscape-card--selected {
+    border-color: #bc8752;
+    box-shadow: 0 10px 28px rgba(160, 94, 39, 0.2);
+  }
+}
+
+.landscape-image {
+  display: block;
+  width: 100%;
+  height: 270px;
+  border-radius: 7px;
+  object-fit: cover;
+}
+
+.landscape-card__content {
+  padding: 18px 5px 8px;
+
+  h2 {
+    margin: 0 0 12px;
+    font-family: Georgia, serif;
+    font-size: 21px;
+    line-height: 1.4;
+
+    span {
+      font-size: 17px;
+    }
+  }
+
+  p {
+    margin: 0;
+    color: #4e4032;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+}
+
+.landscape-card__status {
+  display: inline-block;
+  margin-top: 18px;
+  color: #82582d;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* FICHE AGRANDIE */
+
+.detail-panel {
+  margin-top: 35px;
+  padding: 25px 30px;
+  border: 2px solid;
+  border-radius: 12px;
+  animation: panel-appear 0.3s ease;
+
+  h2 {
+    margin: 12px 0;
+    font-family: Georgia, serif;
+    font-size: 26px;
+    color: #2b2118;
+  }
+
+  p {
+    margin: 0;
+    color: #584839;
+    font-size: 17px;
+    line-height: 1.8;
+  }
+}
+
+.detail-panel--kemet {
+  background: #edf3e5;
+  border-color: #6d994f;
+}
+
+.detail-panel--deshret {
+  background: #fff0dc;
+  border-color: #bc8752;
+}
+
+.detail-panel__eyebrow {
+  color: #9b5b35;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.selection-hint {
+  margin: 30px 0;
+  color: #8a765e;
+  font-size: 15px;
+  font-style: italic;
+}
+
+/* TEXTE DE TRANSITION */
+
+.transition-text {
+  margin-top: 45px;
+
+  h2 {
+    margin: 0 0 12px;
+    color: #a06b3f;
+    font-family: Georgia, serif;
+    font-size: 23px;
+  }
+
+  p {
+    margin: 0;
+    color: #4e4032;
+    font-family: Georgia, serif;
+    font-size: 19px;
+    line-height: 1.7;
+  }
+}
+
+/* NAVIGATION */
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 45px;
+}
+
+.back-button,
+.next-button {
+  padding: 14px 25px;
+  border-radius: 7px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.back-button {
+  border: 1px solid #cbb69b;
+  background: transparent;
+  color: #49331e;
+
+  &:hover {
+    background: #eadcc8;
+  }
+}
+
+.next-button {
+  border: none;
+  background: #f0a030;
+  color: #2b2118;
+
+  &:hover {
+    background: #e39120;
+  }
+}
+
+.navigation-hint {
+  color: #8a765e;
+  font-size: 14px;
+  font-style: italic;
+}
+
+@keyframes panel-appear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* TABLETTE */
+
+@media (max-width: 900px) {
+  .landscapes-page {
+    padding: 35px 25px 50px;
+  }
+
+  .landscape-image {
+    height: 220px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+  .landscapes-page {
+    padding: 30px 18px;
+  }
+
+  .landscapes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .landscape-image {
+    height: 220px;
+  }
+
+  .navigation {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .back-button,
+  .next-button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landscape-card {
+    transition: none;
+  }
+
+  .detail-panel {
+    animation: none;
+  }
+}

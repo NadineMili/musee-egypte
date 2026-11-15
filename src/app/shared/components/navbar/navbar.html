@@ -1,0 +1,22 @@
+
+<header class="museum-header">
+  <nav class="navbar" aria-label="Navigation principale">
+
+    <a class="brand" routerLink="/">
+      Les villes de l'Égypte antique
+    </a>
+
+    <div class="nav-links">
+      @for (item of navigation; track item.path) {
+        <a
+          [routerLink]="item.path"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          {{ item.label }}
+        </a>
+      }
+    </div>
+
+  </nav>
+</header>
