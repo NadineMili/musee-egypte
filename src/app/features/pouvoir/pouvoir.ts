@@ -1,7 +1,9 @@
 
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
+
 import { LirePouvoir } from './components/lire-pouvoir/lire-pouvoir';
+import { Comparateur } from './components/comparateur/comparateur';
 
 type EcranPouvoir =
   | 'introduction'
@@ -9,7 +11,8 @@ type EcranPouvoir =
   | 'fiches'
   | 'temple'
   | 'lecture'
-  | 'fetes';
+  | 'fetes'
+  | 'comparateur';
 
 type Couche = 'vivants' | 'dieux' | 'morts';
 type TypeFete = 'opet' | 'vallee';
@@ -45,19 +48,30 @@ interface Fete {
 @Component({
   selector: 'app-pouvoir',
   standalone: true,
-  imports: [CommonModule, LirePouvoir],
+  imports: [
+    CommonModule,
+    LirePouvoir,
+    Comparateur
+  ],
   templateUrl: './pouvoir.html',
   styleUrl: './pouvoir.scss'
 })
 export class Pouvoir {
-  // Écran affiché au chargement de /etape-4
+
+  // ==========================================
+  // NAVIGATION ENTRE LES ÉCRANS
+  // ==========================================
+
   readonly ecran = signal<EcranPouvoir>('introduction');
 
   allerVers(ecran: EcranPouvoir): void {
     this.ecran.set(ecran);
 
     if (typeof window !== 'undefined') {
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      window.scrollTo({
+        top: 0,
+        behavior: 'instant'
+      });
     }
   }
 
@@ -102,6 +116,18 @@ export class Pouvoir {
   }
 
   // ==========================================
+  // COMPARATEUR : NOUVEL ÉCRAN 4.6
+  // ==========================================
+
+  ouvrirComparateur(): void {
+    this.allerVers('comparateur');
+  }
+
+  fermerComparateur(): void {
+    this.allerVers('fetes');
+  }
+
+  // ==========================================
   // CARTE DES TROIS VILLES DE THÈBES
   // ==========================================
 
@@ -112,9 +138,11 @@ export class Pouvoir {
   ];
 
   readonly coucheActive = signal<Couche>('dieux');
+
   readonly couchesExplorees = signal<Set<Couche>>(
     new Set<Couche>(['dieux'])
   );
+
   readonly toutesCouches = signal(false);
 
   get nombreCouchesExplorees(): number {
@@ -130,7 +158,7 @@ export class Pouvoir {
     this.toutesCouches.set(false);
 
     this.couchesExplorees.update(anciennes => {
-      const nouvelles = new Set(anciennes);
+      const nouvelles = new Set<Couche>(anciennes);
       nouvelles.add(couche);
       return nouvelles;
     });
@@ -141,8 +169,10 @@ export class Pouvoir {
   }
 
   coucheVisible(couche: Couche): boolean {
-    return this.toutesCouches() ||
-      this.coucheActive() === couche;
+    return (
+      this.toutesCouches() ||
+      this.coucheActive() === couche
+    );
   }
 
   ouvrirZone(couche: Couche): void {
@@ -154,6 +184,7 @@ export class Pouvoir {
   // ==========================================
 
   readonly fiches: Record<Couche, Fiche> = {
+
     vivants: {
       id: 'vivants',
       titre: 'Les vivants',
@@ -161,13 +192,29 @@ export class Pouvoir {
       description:
         'On y habite, travaille et échange. Elle est bâtie en brique crue : un matériau fait pour le temps d’une vie, pas pour l’éternité.',
       informations: [
-        { label: 'Matériau', valeur: 'Brique crue' },
-        { label: 'Lieu', valeur: 'Surtout rive est, palais et villages à l’ouest' },
-        { label: 'Fonction', valeur: 'Habiter, travailler, stocker, échanger' },
-        { label: 'Durée', valeur: 'Courte, quotidienne' },
-        { label: 'Traces', valeur: 'Très peu conservées' }
+        {
+          label: 'Matériau',
+          valeur: 'Brique crue'
+        },
+        {
+          label: 'Lieu',
+          valeur: 'Surtout rive est, palais et villages à l’ouest'
+        },
+        {
+          label: 'Fonction',
+          valeur: 'Habiter, travailler, stocker, échanger'
+        },
+        {
+          label: 'Durée',
+          valeur: 'Courte, quotidienne'
+        },
+        {
+          label: 'Traces',
+          valeur: 'Très peu conservées'
+        }
       ]
     },
+
     dieux: {
       id: 'dieux',
       titre: 'Les dieux',
@@ -175,13 +222,29 @@ export class Pouvoir {
       description:
         'La demeure d’Amon-Rê. Elle est en pierre, parce qu’elle doit durer. Plus on avance, plus on passe de la lumière à l’obscurité.',
       informations: [
-        { label: 'Matériau', valeur: 'Pierre (grès, calcaire)' },
-        { label: 'Lieu', valeur: 'Karnak, Louxor, avenue des sphinx' },
-        { label: 'Fonction', valeur: 'Culte, fêtes, économie du temple' },
-        { label: 'Durée', valeur: 'Éternelle' },
-        { label: 'Accès', valeur: 'Public dans les cours, sanctuaire réservé' }
+        {
+          label: 'Matériau',
+          valeur: 'Pierre (grès, calcaire)'
+        },
+        {
+          label: 'Lieu',
+          valeur: 'Karnak, Louxor, avenue des sphinx'
+        },
+        {
+          label: 'Fonction',
+          valeur: 'Culte, fêtes, économie du temple'
+        },
+        {
+          label: 'Durée',
+          valeur: 'Éternelle'
+        },
+        {
+          label: 'Accès',
+          valeur: 'Public dans les cours, sanctuaire réservé'
+        }
       ]
     },
+
     morts: {
       id: 'morts',
       titre: 'Les morts',
@@ -189,17 +252,34 @@ export class Pouvoir {
       description:
         'À l’ouest, là où le soleil se couche et renaît. Tombes taillées dans la roche, temples funéraires au bord des champs.',
       informations: [
-        { label: 'Matériau', valeur: 'Roche creusée et pierre' },
-        { label: 'Lieu', valeur: 'Rive ouest, vallées et bords des champs' },
-        { label: 'Fonction', valeur: 'Préparer l’éternité' },
-        { label: 'Durée', valeur: 'Éternelle' },
-        { label: 'Particularité', valeur: 'Tombe cachée, temple visible' }
+        {
+          label: 'Matériau',
+          valeur: 'Roche creusée et pierre'
+        },
+        {
+          label: 'Lieu',
+          valeur: 'Rive ouest, vallées et bords des champs'
+        },
+        {
+          label: 'Fonction',
+          valeur: 'Préparer l’éternité'
+        },
+        {
+          label: 'Durée',
+          valeur: 'Éternelle'
+        },
+        {
+          label: 'Particularité',
+          valeur: 'Tombe cachée, temple visible'
+        }
       ]
     }
   };
 
   get listeFiches(): Fiche[] {
-    return this.couches.map(couche => this.fiches[couche]);
+    return this.couches.map(
+      couche => this.fiches[couche]
+    );
   }
 
   get ficheActive(): Fiche {
@@ -269,13 +349,19 @@ export class Pouvoir {
   }
 
   choisirStation(numero: number): void {
-    if (numero >= 1 && numero <= this.stations.length) {
+    if (
+      numero >= 1 &&
+      numero <= this.stations.length
+    ) {
       this.stationActuelle.set(numero);
     }
   }
 
   avancerStation(): void {
-    if (this.stationActuelle() < this.stations.length) {
+    if (
+      this.stationActuelle() <
+      this.stations.length
+    ) {
       this.stationActuelle.update(n => n + 1);
     } else {
       this.ouvrirLecturePouvoir();
@@ -308,6 +394,7 @@ export class Pouvoir {
   ];
 
   readonly feteActive = signal<TypeFete>('opet');
+
   readonly animationFete = signal(false);
   readonly progressionFete = signal(0);
   readonly animationVersion = signal(0);
@@ -326,16 +413,13 @@ export class Pouvoir {
     this.feteActive.set(id);
     this.animationFete.set(true);
     this.progressionFete.set(0);
-    this.animationVersion.update(version => version + 1);
+
+    this.animationVersion.update(
+      version => version + 1
+    );
   }
 
   rejouerFete(): void {
     this.lancerFete(this.feteActive());
   }
-
-  ouvrirComparateur(): void {
-    // Le comparateur sera ajouté à l'étape suivante.
-  }
-
-
 }
