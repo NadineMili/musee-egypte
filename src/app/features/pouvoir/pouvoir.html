@@ -1,1 +1,597 @@
-<p>pouvoir works!</p>
+
+<main class="pouvoir-page">
+
+  <!-- =====================================
+       ÉCRAN 4.0 : INTRODUCTION
+       ===================================== -->
+
+  @if (ecran() === 'introduction') {
+    <section class="pouvoir-intro page-container">
+      <div class="intro-content">
+        <span class="eyebrow">ÉTAPE 4 SUR 5</span>
+
+        <h1>Le pouvoir et<br>l’architecture</h1>
+
+        <p class="intro-quote">
+          « Thèbes n’est pas une ville comme les autres :
+          c’est trois villes en une. Celle où l’on vit,
+          celle où l’on honore les dieux, celle où l’on
+          prépare l’éternité. Pourquoi sont-elles si
+          différentes ? »
+        </p>
+
+        <button class="primary-button" (click)="explorerThebes()">
+          Explorer Thèbes <span>→</span>
+        </button>
+
+        <p class="visit-duration">Durée de la visite : 6 à 8 minutes</p>
+
+        <div class="intro-categories">
+          <div class="intro-category vivants">
+            <strong>Les vivants</strong>
+            <span>brique, quotidien</span>
+          </div>
+
+          <div class="intro-category dieux">
+            <strong>Les dieux</strong>
+            <span>pierre, culte</span>
+          </div>
+
+          <div class="intro-category morts">
+            <strong>Les morts</strong>
+            <span>roche, éternité</span>
+          </div>
+        </div>
+      </div>
+
+      <figure class="intro-visual">
+        <img
+          src="/images/territoire/image2.jpg"
+          alt="Vue de Thèbes et de ses monuments">
+        <figcaption>
+          Thèbes et ses monuments — illustration de l'architecture
+          monumentale égyptienne.
+        </figcaption>
+      </figure>
+    </section>
+  }
+
+  <!-- =====================================
+       ÉCRAN 4.1 : CARTE DE THÈBES
+       ===================================== -->
+
+  @if (ecran() === 'carte') {
+    <section class="page-container standard-screen">
+
+      <button class="text-back" (click)="retourIntroduction()">
+        ← Retour à l'introduction
+      </button>
+
+      <h1>Les trois villes de Thèbes</h1>
+      <p class="screen-subtitle">
+        Choisis une couche, puis clique sur une zone de la carte
+        pour ouvrir sa fiche.
+      </p>
+
+      <div class="map-layout">
+        <div class="map-column">
+
+          <div class="layer-toolbar">
+            <button
+              class="layer-button vivants"
+              [class.active]="coucheActive() === 'vivants' && !toutesCouches()"
+              (click)="choisirCouche('vivants')">
+              Les vivants
+            </button>
+
+            <button
+              class="layer-button dieux"
+              [class.active]="coucheActive() === 'dieux' && !toutesCouches()"
+              (click)="choisirCouche('dieux')">
+              Les dieux
+            </button>
+
+            <button
+              class="layer-button morts"
+              [class.active]="coucheActive() === 'morts' && !toutesCouches()"
+              (click)="choisirCouche('morts')">
+              Les morts
+            </button>
+
+            <button class="show-all" (click)="toutAfficher()">
+              Tout afficher
+            </button>
+
+            <strong class="layers-count">
+              Couches vues : {{ nombreCouchesExplorees }}/3
+            </strong>
+          </div>
+
+          <div class="thebes-map">
+
+            <button
+              class="map-region region-morts"
+              [class.muted]="!coucheVisible('morts')"
+              (click)="ouvrirZone('morts')">
+              <strong>Ville des morts</strong>
+              <small>(montagne thébaine)</small>
+              <span class="map-marker marker-six">6</span>
+              <span class="map-marker marker-five">5</span>
+            </button>
+
+            <div class="map-sites">
+              @for (numero of [1, 2, 3, 4, 7]; track numero) {
+                <button
+                  class="map-site"
+                  (click)="ouvrirZone('morts')">
+                  {{ numero }}
+                </button>
+              }
+            </div>
+
+            <div class="fertile-strip"></div>
+
+            <div class="map-nile">NIL</div>
+
+            <div class="fertile-strip"></div>
+
+            <div class="map-east">
+
+              <button
+                class="map-karnak"
+                [class.muted]="!coucheVisible('dieux')"
+                (click)="ouvrirZone('dieux')">
+                K
+                <small>Karnak</small>
+              </button>
+
+              <button
+                class="map-living"
+                [class.muted]="!coucheVisible('vivants')"
+                (click)="ouvrirZone('vivants')">
+                <span>Ville des vivants<br>(brique)</span>
+                <em>Avenue des sphinx</em>
+              </button>
+
+              <button
+                class="map-luxor"
+                [class.muted]="!coucheVisible('dieux')"
+                (click)="ouvrirZone('dieux')">
+                L
+                <small>Louxor</small>
+              </button>
+
+            </div>
+
+            <span class="map-north">Nord ↑</span>
+          </div>
+
+          <div class="map-legend">
+            <span><i class="legend-vivants"></i> Vivants : brique</span>
+            <span><i class="legend-dieux"></i> Religieux : pierre</span>
+            <span><i class="legend-morts"></i> Morts : roche</span>
+          </div>
+
+          <p class="map-caption">
+            Schéma non à l'échelle, positions approximatives.
+            1 Deir el-Bahari · 2 Ramesseum ·
+            3 Amenhotep III · 4 Médinet Habou ·
+            5 Vallée des Rois · 6 Vallée des Reines · 7 Malqata.
+          </p>
+        </div>
+
+        <aside class="map-info-card">
+          <img
+            [src]="ficheActive.image"
+            [alt]="ficheActive.titre">
+
+          <h2>{{ ficheActive.titre }}</h2>
+          <p>{{ ficheActive.description }}</p>
+
+          <div class="info-rows">
+            @for (information of ficheActive.informations; track information.label) {
+              <div class="info-row">
+                <strong>{{ information.label }}</strong>
+                <span>{{ information.valeur }}</span>
+              </div>
+            }
+          </div>
+
+          <button
+            class="primary-button full-width"
+            [disabled]="!toutesCouchesExplorees"
+            (click)="ouvrirFiches()">
+            Suite : les trois fiches →
+          </button>
+
+          @if (!toutesCouchesExplorees) {
+            <p class="help-text">
+              Explore les trois couches pour continuer.
+            </p>
+          }
+        </aside>
+      </div>
+    </section>
+  }
+
+  <!-- =====================================
+       ÉCRAN 4.2 : TROIS FICHES
+       ===================================== -->
+
+  @if (ecran() === 'fiches') {
+    <section class="page-container standard-screen">
+
+      <div class="screen-topline">
+        <button class="text-back" (click)="retourCarte()">
+          ← Retour à la carte de Thèbes
+        </button>
+        <span class="eyebrow">
+          ÉTAPE 4 SUR 5 — LE POUVOIR ET L'ARCHITECTURE
+        </span>
+      </div>
+
+      <div class="three-fiches">
+        @for (fiche of listeFiches; track fiche.id) {
+          <article class="fiche-card" [class]="fiche.id">
+
+            <h2>{{ fiche.titre }}</h2>
+
+            <div class="fiche-body">
+              <img [src]="fiche.image" [alt]="fiche.titre">
+
+              <p class="fiche-description">
+                {{ fiche.description }}
+              </p>
+
+              <div class="fiche-informations">
+                @for (info of fiche.informations; track info.label) {
+                  <div class="fiche-info-row">
+                    <strong>{{ info.label }}</strong>
+                    <span>{{ info.valeur }}</span>
+                  </div>
+                }
+              </div>
+            </div>
+
+          </article>
+        }
+      </div>
+
+      <div class="screen-actions">
+        <button class="primary-button" (click)="ouvrirTemple()">
+          Entrer dans le temple de Karnak →
+        </button>
+      </div>
+    </section>
+  }
+
+  <!-- =====================================
+       ÉCRAN 4.3 : TEMPLE DE KARNAK
+       ===================================== -->
+
+  @if (ecran() === 'temple') {
+    <section class="page-container standard-screen temple-screen">
+
+      <button class="text-back" (click)="retourFiches()">
+        ← Retour aux trois fiches
+      </button>
+
+      <h1>Entrer dans un temple de Karnak</h1>
+      <p class="screen-subtitle">
+        Avance salle par salle : la lumière diminue et l'accès se restreint.
+      </p>
+
+      <div class="temple-layout">
+
+        <div class="temple-left">
+
+          <!-- PLAN GRIS, COMME LE PROTOTYPE -->
+          <div class="temple-plan">
+            <div class="temple-plan-inner">
+
+              <button
+                class="plan-zone plan-allee"
+                [class.plan-selected]="stationActuelle() === 1"
+                (click)="choisirStation(1)">
+                <span class="zone-label">Allée de sphinx</span>
+                <span class="allee-line"></span>
+              </button>
+
+              <button
+                class="plan-zone plan-pylone"
+                [class.plan-selected]="stationActuelle() === 1"
+                (click)="choisirStation(1)">
+                <span class="zone-label">Pylône</span>
+              </button>
+
+              <button
+                class="plan-zone plan-cour"
+                [class.plan-selected]="stationActuelle() === 2"
+                (click)="choisirStation(2)">
+                <span class="zone-label">Cour à ciel ouvert</span>
+                <span class="colonnes cour-colonnes">
+                  @for (colonne of [1, 2, 3, 4, 5, 6]; track colonne) {
+                    <span class="colonne"></span>
+                  }
+                </span>
+              </button>
+
+              <button
+                class="plan-zone plan-hypostyle"
+                [class.plan-selected]="stationActuelle() === 3"
+                (click)="choisirStation(3)">
+                <span class="zone-label">Salle hypostyle</span>
+                <span class="colonnes hypostyle-colonnes">
+                  @for (colonne of [
+                    1, 2, 3, 4, 5, 6,
+                    7, 8, 9, 10, 11, 12,
+                    13, 14, 15, 16, 17, 18
+                  ]; track colonne) {
+                    <span class="colonne"></span>
+                  }
+                </span>
+              </button>
+
+              <button
+                class="plan-zone plan-offrandes"
+                [class.plan-selected]="stationActuelle() === 4"
+                (click)="choisirStation(4)">
+                <span class="zone-label">Offrandes</span>
+              </button>
+
+              <button
+                class="plan-zone plan-sanctuaire"
+                [class.plan-selected]="stationActuelle() === 5"
+                (click)="choisirStation(5)">
+                <span class="zone-label">Sanctuaire</span>
+              </button>
+
+            </div>
+          </div>
+
+          <p class="temple-caption">
+            Plan schématique d'un temple égyptien (vue de dessus,
+            entrée à gauche). Le plan réel de chaque temple varie.
+          </p>
+
+          <div class="temple-navigation">
+            <button
+              class="temple-prev"
+              [disabled]="stationActuelle() === 1"
+              (click)="reculerStation()">
+              ← Reculer
+            </button>
+
+            <div class="temple-steps">
+              @for (station of stations; track $index) {
+                <button
+                  [class.active]="stationActuelle() === $index + 1"
+                  (click)="choisirStation($index + 1)">
+                  {{ $index + 1 }}
+                </button>
+              }
+            </div>
+
+            <button class="temple-next" (click)="avancerStation()">
+              {{ stationActuelle() === 5 ? 'Continuer →' : 'Avancer →' }}
+            </button>
+          </div>
+
+          <div class="temple-bottom">
+            <img
+              class="temple-photo"
+              src="/images/territoire/salle_hypostyle.jpg"
+              alt="Salle hypostyle de Karnak">
+
+            <div class="temple-access">
+              <h3>Qui peut entrer ?</h3>
+
+              <div
+                class="access-item"
+                [class.access-yes]="stationActive.publicAutorise"
+                [class.access-no]="!stationActive.publicAutorise">
+                Le public :
+                {{ stationActive.publicAutorise ? 'oui' : 'non' }}
+              </div>
+
+              <div
+                class="access-item"
+                [class.access-yes]="stationActive.pretresAutorises"
+                [class.access-no]="!stationActive.pretresAutorises">
+                Les prêtres :
+                {{ stationActive.pretresAutorises ? 'oui' : 'non' }}
+              </div>
+
+              <div
+                class="access-item"
+                [class.access-yes]="stationActive.roiAutorise"
+                [class.access-no]="!stationActive.roiAutorise">
+                Le roi :
+                {{ stationActive.roiAutorise ? 'oui' : 'non' }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="temple-information">
+          <span class="temple-station-badge">
+            Station {{ stationActuelle() }} sur 5
+          </span>
+
+          <h2>{{ stationActive.titre }}</h2>
+          <p class="station-description">
+            {{ stationActive.description }}
+          </p>
+
+          <h3>Les cinq stations</h3>
+
+          <div class="temple-stations">
+            @for (station of stations; track $index) {
+              <button
+                [class.active]="stationActuelle() === $index + 1"
+                (click)="choisirStation($index + 1)">
+                {{ $index + 1 }}. {{ station.titre }}
+              </button>
+            }
+          </div>
+
+          <p class="temple-note">
+            La progression vers l'obscurité est une tendance classique,
+            pas une règle absolue.
+          </p>
+
+          <button class="temple-return-map" (click)="retourCarte()">
+            Retour à la carte
+          </button>
+        </aside>
+
+      </div>
+    </section>
+  }
+
+  <!-- =====================================
+       ÉCRAN 4.4 : LIRE LE POUVOIR
+       ===================================== -->
+
+  @if (ecran() === 'lecture') {
+    <app-lire-pouvoir
+      (retour)="fermerLecturePouvoir()"
+      (suivant)="ouvrirFetes()">
+    </app-lire-pouvoir>
+  }
+
+  <!-- =====================================
+       ÉCRAN 4.5 : LES FÊTES
+       ===================================== -->
+
+  @if (ecran() === 'fetes') {
+    <section class="page-container standard-screen">
+
+      <button class="text-back" (click)="allerVers('lecture')">
+        ← Retour à la lecture du pouvoir
+      </button>
+
+      <h1>Deux fêtes relient les trois villes</h1>
+
+      <p class="screen-subtitle">
+        Lance une fête pour voir la barque d'Amon traverser Thèbes.
+      </p>
+
+      <div class="fetes-layout">
+
+        <div class="fetes-map-column">
+          <div
+            class="fetes-map"
+            [class.vallee-active]="feteActive() === 'vallee'">
+
+            <div class="fete-west">
+              <strong>Ville des morts</strong>
+              <small>(montagne thébaine)</small>
+              <span>6</span>
+              <span>5</span>
+            </div>
+
+            <div class="fete-sites">
+              @for (numero of [1, 2, 3, 4, 7]; track numero) {
+                <span>{{ numero }}</span>
+              }
+            </div>
+
+            <div class="fete-green"></div>
+            <div class="fete-nile">NIL</div>
+            <div class="fete-green"></div>
+
+            <div class="fete-east">
+              <div class="fete-karnak">K</div>
+              <div class="fete-city">
+                Ville des vivants
+                <small>(brique)</small>
+              </div>
+              <div class="fete-luxor">L</div>
+
+              <div class="fete-procession">
+                <div class="procession-line"></div>
+              </div>
+            </div>
+
+            @if (animationFete()) {
+              <div
+                class="fete-barque"
+                [class.route-vallee]="feteActive() === 'vallee'"
+                [class.route-opet]="feteActive() === 'opet'"
+                [attr.data-animation]="animationVersion()">
+                <span class="barque-symbol">⛵</span>
+                <small>Barque d'Amon</small>
+              </div>
+            }
+          </div>
+
+          <div class="map-legend">
+            <span><i class="legend-vivants"></i> Vivants : brique</span>
+            <span><i class="legend-dieux"></i> Religieux : pierre</span>
+            <span><i class="legend-morts"></i> Morts : roche</span>
+          </div>
+
+          <p class="map-caption">
+            Schéma non à l'échelle, positions approximatives.
+            Le trajet est une représentation pédagogique.
+          </p>
+
+          <div class="sun-track">
+            <span>Soleil</span>
+            <span>Est (aube)</span>
+            <div class="sun-line"><span></span></div>
+            <span>Ouest (coucher)</span>
+          </div>
+        </div>
+
+        <aside class="fetes-information">
+          <div class="fetes-choices">
+            <button
+              [class.active]="feteActive() === 'opet'"
+              (click)="choisirFete('opet')">
+              Fête d'Opet
+            </button>
+
+            <button
+              [class.active]="feteActive() === 'vallee'"
+              (click)="choisirFete('vallee')">
+              Belle Fête de la Vallée
+            </button>
+          </div>
+
+          <h2>{{ feteSelectionnee.titre }}</h2>
+          <p>{{ feteSelectionnee.description }}</p>
+
+          <p class="fetes-note">
+            Au Nouvel Empire, les détails des fêtes varient
+            selon les périodes.
+          </p>
+
+          <div class="fetes-actions">
+            <button class="secondary-button" (click)="rejouerFete()">
+              Rejouer
+            </button>
+
+            <button
+              class="primary-button"
+              (click)="ouvrirComparateur()"
+              disabled
+              title="Le comparateur sera ajouté à l'étape suivante">
+              Suite : comparateur
+            </button>
+          </div>
+        </aside>
+      </div>
+    </section>
+  }
+
+  @if (ecran() !== 'introduction') {
+    <footer class="pouvoir-footer page-container">
+      Étape 4 : le pouvoir et l'architecture
+      <span>|</span>
+      Projet de théorie et histoire de l'urbanisme
+    </footer>
+  }
+
+</main>

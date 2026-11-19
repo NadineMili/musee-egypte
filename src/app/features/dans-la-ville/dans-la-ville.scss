@@ -1,0 +1,660 @@
+
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.exploration-page {
+  min-height: 100vh;
+  background: #f7ecd9;
+  color: #30251b;
+  padding: 55px 30px 90px;
+}
+
+.exploration-container {
+  max-width: 1720px;
+  margin: 0 auto;
+}
+
+/* EN-TÊTE */
+
+.page-heading {
+  margin-bottom: 40px;
+
+  .eyebrow {
+    display: block;
+    color: #a55c2b;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+  }
+
+  h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(42px, 5vw, 76px);
+    line-height: 1.08;
+    margin: 0 0 20px;
+    color: #30251b;
+  }
+
+  p {
+    color: #745943;
+    font-size: 21px;
+    line-height: 1.7;
+    max-width: 950px;
+    margin: 0;
+  }
+}
+
+/* SÉLECTEUR DES VILLES */
+
+.city-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  padding: 25px 30px;
+  background: #fffaf2;
+  border: 1px solid #e6d2b4;
+  border-radius: 16px;
+  margin-bottom: 25px;
+}
+
+.city-selector-heading {
+  span {
+    display: block;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #b8752e;
+    margin-bottom: 7px;
+  }
+
+  h2 {
+    font-family: Georgia, serif;
+    font-size: 30px;
+    margin: 0 0 7px;
+  }
+
+  p {
+    color: #80684f;
+    font-size: 16px;
+    margin: 0;
+  }
+}
+
+.city-selector-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  button {
+    background: #f5e6cf;
+    border: 1px solid #dfc7a7;
+    color: #4a3522;
+    border-radius: 9px;
+    padding: 14px 25px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+
+    &:hover {
+      background: #ead2aa;
+      transform: translateY(-2px);
+    }
+
+    &.active {
+      background: #245b91;
+      border-color: #245b91;
+      color: white;
+    }
+  }
+}
+
+.city-introduction {
+  font-size: 19px;
+  line-height: 1.7;
+  color: #5f4834;
+  margin: 0 0 12px;
+}
+
+.exploration-instruction {
+  font-size: 17px;
+  color: #896c50;
+  margin: 0 0 30px;
+}
+
+/* TROIS COLONNES */
+
+.exploration-layout {
+  display: grid;
+  grid-template-columns:
+    minmax(220px, 0.9fr)
+    minmax(400px, 2.2fr)
+    minmax(280px, 1.1fr);
+  align-items: start;
+  gap: 25px;
+}
+
+/* ESPACES À GAUCHE */
+
+.spaces-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.space-button {
+  width: 100%;
+  text-align: left;
+  border: 1px solid #e3cfb1;
+  background: #fffaf3;
+  border-radius: 12px;
+  padding: 23px 20px;
+  cursor: pointer;
+  color: #30251b;
+  transition: 0.2s ease;
+
+  strong {
+    display: block;
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+
+  span {
+    display: block;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #85654a;
+  }
+
+  &:hover {
+    border-color: #c99042;
+    transform: translateX(4px);
+    box-shadow: 0 5px 18px rgba(91, 63, 27, 0.08);
+  }
+
+  &.active {
+    background: #245b91;
+    border-color: #245b91;
+    color: #fff;
+
+    span {
+      color: #e7eff8;
+    }
+  }
+}
+
+/* PLAN CENTRAL */
+
+.map-panel {
+  background: #fffaf3;
+  border: 1px solid #e3cfb1;
+  border-radius: 16px;
+  padding: 24px;
+  min-width: 0;
+}
+
+.map-panel-heading {
+  margin-bottom: 20px;
+
+  span {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 800;
+    color: #b77532;
+  }
+
+  h3 {
+    font-family: Georgia, serif;
+    font-size: 26px;
+    margin: 8px 0 0;
+  }
+}
+
+/* PLAN SCHÉMATIQUE */
+
+.city-map {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.35;
+  min-height: 380px;
+  background: #e8e3d9;
+  border: 3px solid #383d40;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+/* ZONES */
+
+.map-zone,
+.map-road {
+  position: absolute;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.map-zone {
+  border: 2px solid #4d5558;
+  border-radius: 6px;
+  padding: 15px;
+  color: #272727;
+  z-index: 2;
+
+  strong {
+    display: block;
+    font-size: clamp(12px, 1.1vw, 17px);
+    line-height: 1.35;
+  }
+
+  > span {
+    display: block;
+    font-size: 13px;
+    margin-top: 7px;
+  }
+
+  &:hover {
+    filter: brightness(1.04);
+    box-shadow: inset 0 0 0 2px #245b91;
+  }
+
+  &.selected {
+    outline: 4px solid #245b91;
+    outline-offset: -4px;
+    box-shadow: 0 0 0 2px rgba(36, 91, 145, 0.15);
+  }
+}
+
+/* TEMPLE */
+
+.zone-temple {
+  top: 5%;
+  left: 4%;
+  width: 36%;
+  height: 29%;
+  background: #f8e7b6;
+}
+
+/* PALAIS */
+
+.zone-palace {
+  top: 5%;
+  right: 4%;
+  width: 29%;
+  height: 29%;
+  background: #ead9c6;
+}
+
+/* HABITATIONS */
+
+.zone-habitat {
+  bottom: 5%;
+  left: 4%;
+  width: 58%;
+  height: 46%;
+  background: #dbe6f4;
+}
+
+.houses {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-rows: repeat(2, 1fr);
+  gap: 5px;
+  height: 70%;
+  margin-top: 12px;
+}
+
+.house {
+  display: block;
+  min-width: 0;
+  background: #fffaf2;
+  border: 1px solid #9cb5d0;
+}
+
+/* ADMINISTRATION */
+
+.zone-admin {
+  right: 4%;
+  top: 45%;
+  width: 29%;
+  height: 22%;
+  background: #dfe7da;
+}
+
+/* ATELIERS */
+
+.zone-workshops {
+  right: 4%;
+  bottom: 5%;
+  width: 29%;
+  height: 20%;
+  background: #e0ded6;
+  display: flex;
+  align-items: center;
+}
+
+/* RUES */
+
+.map-road {
+  background: #33393d;
+  border: 0;
+  color: white;
+  z-index: 1;
+
+  &:hover,
+  &.selected {
+    background: #245b91;
+  }
+}
+
+.road-horizontal {
+  top: 37%;
+  left: 0;
+  width: 100%;
+  height: 5%;
+  padding: 0 12px;
+  font-size: 12px;
+}
+
+.road-vertical {
+  top: 0;
+  left: 65%;
+  width: 3%;
+  height: 100%;
+  padding: 0;
+}
+
+/* VARIATIONS DES PLANS */
+
+/* Memphis : zones politiques plus importantes */
+
+.map-memphis {
+  .zone-palace {
+    width: 32%;
+    height: 32%;
+  }
+
+  .zone-temple {
+    width: 35%;
+  }
+
+  .zone-habitat {
+    width: 56%;
+  }
+}
+
+/* Thèbes : espace religieux plus important */
+
+.map-thebes {
+  .zone-temple {
+    width: 43%;
+    height: 32%;
+  }
+
+  .zone-palace {
+    width: 24%;
+  }
+
+  .zone-habitat {
+    width: 57%;
+  }
+}
+
+/* Amarna : axe principal et organisation planifiée */
+
+.map-amarna {
+  .zone-temple {
+    width: 37%;
+  }
+
+  .zone-palace {
+    width: 30%;
+  }
+
+  .road-vertical {
+    left: 64%;
+    width: 4%;
+  }
+}
+
+/* LÉGENDE */
+
+.map-caption {
+  margin: 15px 0;
+  color: #8c7358;
+  font-size: 13px;
+  font-style: italic;
+}
+
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  margin-top: 18px;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: #5f5141;
+  }
+
+  i {
+    width: 13px;
+    height: 13px;
+    border: 1px solid #9e917f;
+    border-radius: 3px;
+  }
+
+  .legend-habitat {
+    background: #dbe6f4;
+  }
+
+  .legend-temple {
+    background: #f8e7b6;
+  }
+
+  .legend-palace {
+    background: #ead9c6;
+  }
+
+  .legend-admin {
+    background: #dfe7da;
+  }
+}
+
+/* INFORMATIONS À DROITE */
+
+.information-panel {
+  background: #fffaf3;
+  border: 1px solid #e3cfb1;
+  border-radius: 16px;
+  padding: 30px 25px;
+  min-width: 0;
+}
+
+.information-badge {
+  display: inline-block;
+  background: #eee5d6;
+  border-radius: 30px;
+  padding: 9px 13px;
+  font-size: 12px;
+  color: #4f4032;
+  margin-bottom: 25px;
+}
+
+.information-panel h2 {
+  font-family: Georgia, serif;
+  font-size: clamp(26px, 2vw, 35px);
+  margin: 0 0 28px;
+  line-height: 1.2;
+}
+
+.information-category,
+.discover-heading {
+  font-size: 13px;
+  font-weight: 800;
+  color: #245b91;
+  letter-spacing: 1.5px;
+  margin-bottom: 17px;
+}
+
+.information-description {
+  border-left: 5px solid #d48b2a;
+  padding: 5px 0 5px 17px;
+  margin-bottom: 32px;
+
+  strong {
+    display: block;
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin: 0;
+    color: #584431;
+  }
+}
+
+.discover-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 18px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+}
+
+.discover-number {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #245b91;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.information-footer {
+  border-top: 1px solid #e7d7c2;
+  padding-top: 22px;
+  margin-top: 30px;
+
+  span {
+    display: block;
+    color: #b17b3c;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    margin-bottom: 8px;
+  }
+
+  strong {
+    font-family: Georgia, serif;
+    font-size: 23px;
+  }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1200px) {
+  .exploration-layout {
+    grid-template-columns: 240px minmax(0, 1fr);
+  }
+
+  .information-panel {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 800px) {
+  .exploration-page {
+    padding: 35px 18px 60px;
+  }
+
+  .exploration-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .spaces-panel {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .information-panel {
+    grid-column: auto;
+  }
+
+  .city-selector {
+    padding: 20px;
+  }
+
+  .city-selector-buttons {
+    width: 100%;
+
+    button {
+      flex: 1;
+    }
+  }
+}
+
+@media (max-width: 520px) {
+  .spaces-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .city-map {
+    min-height: 280px;
+  }
+
+  .map-panel {
+    padding: 12px;
+  }
+
+  .map-zone {
+    padding: 7px;
+
+    strong {
+      font-size: 11px;
+    }
+
+    > span {
+      font-size: 10px;
+    }
+  }
+
+  .houses {
+    gap: 2px;
+    margin-top: 6px;
+  }
+
+  .information-panel {
+    padding: 22px;
+  }
+}

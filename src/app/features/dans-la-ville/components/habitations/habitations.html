@@ -1,0 +1,281 @@
+
+<section class="habitations-page">
+
+  <div class="habitations-container">
+
+    <!-- RETOUR -->
+    <button
+      type="button"
+      class="back-link"
+      (click)="retourVueAerienne()"
+    >
+      ← Retour à la vue aérienne de {{ ville }}
+    </button>
+
+    <!-- TITRE -->
+    <header class="page-header">
+
+      <span class="eyebrow">
+        ÉTAPE 3 SUR 5 — EXPLORATION URBAINE
+      </span>
+
+      <h1>
+        Les habitations : comment vivait-on dans la ville ?
+      </h1>
+
+      <p>
+        Découvrez l'organisation d'une habitation de l'Égypte
+        antique en sélectionnant ses différents espaces.
+      </p>
+
+    </header>
+
+    <!-- PLAN ET INFORMATIONS -->
+    <div class="habitation-exploration">
+
+      <!-- PLAN INTERACTIF -->
+      <div class="plan-card">
+
+        <div class="card-heading">
+
+          <div>
+
+            <span class="small-label">
+              RECONSTITUTION PÉDAGOGIQUE
+            </span>
+
+            <h2>Explorer une habitation</h2>
+
+          </div>
+
+          <span class="city-tag">
+            {{ ville }}
+          </span>
+
+        </div>
+
+        <div class="house-plan">
+
+          <!-- TERRASSE -->
+          <button
+            type="button"
+            class="house-zone terrasse"
+            [class.active]="estActive('terrasse')"
+            (click)="selectionnerZone('terrasse')"
+          >
+            Terrasse et espaces domestiques
+          </button>
+
+          <div class="house-main">
+
+            <!-- PIÈCES DE VIE -->
+            <button
+              type="button"
+              class="house-zone pieces"
+              [class.active]="estActive('pieces')"
+              (click)="selectionnerZone('pieces')"
+            >
+              Pièces de vie
+            </button>
+
+            <div class="house-right">
+
+              <!-- COUR -->
+              <button
+                type="button"
+                class="house-zone cour"
+                [class.active]="estActive('cour')"
+                (click)="selectionnerZone('cour')"
+              >
+                Cour intérieure
+              </button>
+
+              <!-- STOCKAGE -->
+              <button
+                type="button"
+                class="house-zone stockage"
+                [class.active]="estActive('stockage')"
+                (click)="selectionnerZone('stockage')"
+              >
+                Espaces de stockage
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <p class="plan-caption">
+          Reconstitution pédagogique d'une maison,
+          non à l'échelle.
+        </p>
+
+      </div>
+
+      <!-- FICHE D'INFORMATIONS -->
+      <aside class="information-card">
+
+        <span class="small-label">
+          ESPACE SÉLECTIONNÉ
+        </span>
+
+        <h2>{{ detailActif.titre }}</h2>
+
+        <div class="function-section">
+
+          <span class="section-label">
+            FONCTION URBAINE
+          </span>
+
+          <div class="function-content">
+
+            <h3>{{ detailActif.fonction }}</h3>
+
+            <p>{{ detailActif.description }}</p>
+
+          </div>
+
+        </div>
+
+        <div class="help-box">
+
+          <strong>À vous d'explorer !</strong>
+
+          <p>
+            Touchez les autres parties de la maison
+            pour découvrir leur rôle dans la vie familiale.
+          </p>
+
+        </div>
+
+        <div class="selected-city">
+
+          <span>VILLE EXPLORÉE</span>
+
+          <strong>{{ ville }}</strong>
+
+        </div>
+
+      </aside>
+
+    </div>
+
+    <!-- COMPARAISON -->
+    <section class="comparison-section">
+
+      <div class="comparison-header">
+
+        <div>
+
+          <span class="small-label">
+            COMPRENDRE LES DIFFÉRENCES SOCIALES
+          </span>
+
+          <h2>Comparer deux habitations</h2>
+
+        </div>
+
+        <p>
+          Exemples pédagogiques de dimensions différentes
+        </p>
+
+      </div>
+
+      <div class="comparison-grid">
+
+        <!-- MAISON A -->
+        <article class="comparison-card">
+
+          <h3>Maison A</h3>
+
+          <div class="house-size small-house"></div>
+
+          <div class="house-description">
+
+            <p>
+              <strong>Superficie :</strong> réduite
+            </p>
+
+            <p>
+              <strong>Organisation :</strong>
+              peu de pièces, usages combinés
+            </p>
+
+            <p>
+              <strong>Richesse :</strong>
+              moyens modestes
+            </p>
+
+          </div>
+
+        </article>
+
+        <!-- MAISON B -->
+        <article class="comparison-card">
+
+          <h3>Maison B</h3>
+
+          <div class="house-size large-house"></div>
+
+          <div class="house-description">
+
+            <p>
+              <strong>Superficie :</strong> étendue
+            </p>
+
+            <p>
+              <strong>Organisation :</strong>
+              pièces plus nombreuses, fonctions séparées
+            </p>
+
+            <p>
+              <strong>Richesse :</strong>
+              moyens plus importants
+            </p>
+
+          </div>
+
+        </article>
+
+        <!-- QUESTION -->
+        <article class="question-card">
+
+          <span>QUESTION DE RÉFLEXION</span>
+
+          <p>
+            « Est-ce que tous les habitants de la ville
+            vivaient dans les mêmes conditions ? »
+          </p>
+
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- NAVIGATION -->
+    <div class="bottom-navigation">
+
+      <button
+        type="button"
+        class="btn-back"
+        (click)="retourVueAerienne()"
+      >
+        ← Retour à la vue aérienne
+      </button>
+
+      <button
+        type="button"
+        class="btn-explorer-habitation"
+        (click)="ouvrirHabitants()"
+      >
+        Voir la ville à travers ses habitants
+        <span aria-hidden="true">→</span>
+      </button>
+
+    </div>
+
+  </div>
+
+</section>

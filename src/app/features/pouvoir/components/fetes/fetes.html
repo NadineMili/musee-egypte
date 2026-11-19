@@ -1,0 +1,319 @@
+
+<section class="fetes-page">
+
+  <div class="fetes-container">
+
+    <!-- EN-TÊTE -->
+    <header class="fetes-header">
+
+      <div class="header-top">
+
+        <button
+          type="button"
+          class="back-link"
+          (click)="retourLecture()"
+        >
+          ← Retour à la lecture du pouvoir
+        </button>
+
+        <span class="step-label">
+          ÉTAPE 4 SUR 5 — LE POUVOIR ET L'ARCHITECTURE
+        </span>
+
+      </div>
+
+      <h1>Deux fêtes relient les trois villes</h1>
+
+      <p>
+        Lance une fête pour voir la barque d'Amon
+        traverser Thèbes.
+      </p>
+
+    </header>
+
+    <div class="fetes-layout">
+
+      <!-- COLONNE GAUCHE -->
+      <div class="carte-section">
+
+        <div class="carte-thebes">
+
+          <!-- ZONE DES MORTS -->
+          <div class="zone-morts">
+
+            <strong>
+              Ville des morts
+            </strong>
+
+            <small>
+              (montagne thébaine)
+            </small>
+
+            <span class="repere mort-6">6</span>
+            <span class="repere mort-5">5</span>
+
+          </div>
+
+          <!-- MONUMENTS RIVE OUEST -->
+          <div class="monuments-ouest">
+
+            <span class="repere monument m1">1</span>
+            <span class="repere monument m2">2</span>
+            <span class="repere monument m3">3</span>
+            <span class="repere monument m4">4</span>
+            <span class="repere monument m7">7</span>
+
+          </div>
+
+          <!-- BANDES FERTILES -->
+          <div class="rive-fertile rive-ouest"></div>
+
+          <!-- NIL -->
+          <div class="nil">
+            <span>NIL</span>
+          </div>
+
+          <div class="rive-fertile rive-est"></div>
+
+          <!-- VILLE DES VIVANTS -->
+          <div class="zone-vivants">
+
+            <span>
+              Ville des vivants
+              <small>(brique)</small>
+            </span>
+
+          </div>
+
+          <!-- TEMPLE DE KARNAK -->
+          <div class="temple karnak">
+
+            <span class="repere">K</span>
+
+          </div>
+
+          <!-- TEMPLE DE LOUXOR -->
+          <div class="temple louxor">
+
+            <span class="repere">L</span>
+
+          </div>
+
+          <!-- AVENUE DES SPHINX -->
+          <div class="avenue-sphinx">
+            Avenue des sphinx
+          </div>
+
+          <!-- NORD -->
+          <div class="nord">
+            <span class="nord-fleche">↑</span>
+            Nord
+          </div>
+
+          <!-- TRAJET DE LA FÊTE D'OPET -->
+          @if (feteActive() === 'opet') {
+
+            <div class="trajet trajet-opet">
+
+              <div
+                class="trajet-progress"
+                [style.height.%]="traceOpet"
+              ></div>
+
+            </div>
+
+          }
+
+          <!-- TRAJET DE LA BELLE FÊTE -->
+          @if (feteActive() === 'vallee') {
+
+            <div class="trajet trajet-vallee">
+
+              <div
+                class="trajet-progress"
+                [style.width.%]="traceVallee"
+              ></div>
+
+            </div>
+
+          }
+
+          <!-- BARQUE ANIMÉE -->
+          <div
+            class="barque"
+            [style.left.%]="positionBarqueX"
+            [style.top.%]="positionBarqueY"
+            [class.barque-active]="enCours()"
+            [attr.aria-label]="'Barque d’Amon : ' + progressionPourcentage + '% du trajet'"
+            role="img"
+          >
+
+            <span class="barque-symbole">⛵</span>
+
+            <span class="barque-label">
+              Barque d'Amon
+            </span>
+
+          </div>
+
+        </div>
+
+        <!-- LÉGENDE -->
+        <div class="carte-legende">
+
+          <span>
+            <i class="legende-vivants"></i>
+            Vivants : brique
+          </span>
+
+          <span>
+            <i class="legende-dieux"></i>
+            Religieux : pierre
+          </span>
+
+          <span>
+            <i class="legende-morts"></i>
+            Morts : roche
+          </span>
+
+        </div>
+
+        <p class="carte-note">
+          Schéma non à l'échelle, positions approximatives.
+          1 Deir el-Bahari · 2 Ramesseum ·
+          3 Amenhotep III · 4 Médinet Habou ·
+          5 Vallée des Rois · 6 Vallée des Reines ·
+          7 Malqata
+        </p>
+
+        <!-- CURSEUR DU SOLEIL -->
+        <div class="soleil-section">
+
+          <div class="soleil-titres">
+            <strong>Soleil</strong>
+            <span>{{ progressionPourcentage }} % du trajet</span>
+          </div>
+
+          <div class="soleil-curseur">
+
+            <span>Est (aube)</span>
+
+            <div class="soleil-track">
+
+              <div
+                class="soleil-indicateur"
+                [style.left.%]="soleilPosition"
+              >
+                <span>☀</span>
+              </div>
+
+            </div>
+
+            <span>Ouest (coucher)</span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- COLONNE DROITE -->
+      <aside class="fetes-information">
+
+        <div class="fetes-choix">
+
+          <button
+            type="button"
+            class="fete-bouton opet"
+            [class.active]="feteActive() === 'opet'"
+            (click)="choisirFete('opet')"
+          >
+            Fête d'Opet
+          </button>
+
+          <button
+            type="button"
+            class="fete-bouton vallee"
+            [class.active]="feteActive() === 'vallee'"
+            (click)="choisirFete('vallee')"
+          >
+            Belle Fête de la Vallée
+          </button>
+
+        </div>
+
+        <!-- DESCRIPTIONS -->
+        <div class="fetes-descriptions">
+
+          @for (fete of fetes; track fete.id) {
+
+            <div
+              class="fete-description"
+              [class.description-active]="feteActive() === fete.id"
+            >
+
+              <strong>
+                {{ fete.nom }}.
+              </strong>
+
+              {{ fete.description }}
+
+            </div>
+
+          }
+
+        </div>
+
+        <div class="animation-status" aria-live="polite">
+
+          @if (enCours()) {
+            <span class="status-running">
+              <span class="status-dot"></span>
+              Procession en cours...
+            </span>
+          } @else if (terminee()) {
+            <span class="status-complete">
+              ✓ Le trajet est terminé.
+            </span>
+          }
+
+        </div>
+
+        <p class="fetes-nuance">
+          Au Nouvel Empire. Les détails des fêtes varient
+          selon les périodes.
+        </p>
+
+        <div class="fetes-actions">
+
+          <button
+            type="button"
+            class="rejouer-button"
+            (click)="rejouer()"
+          >
+            ↻ Rejouer
+          </button>
+
+          <button
+            type="button"
+            class="suite-button"
+            (click)="allerComparateur()"
+          >
+            Suite : comparateur →
+          </button>
+
+        </div>
+
+      </aside>
+
+    </div>
+
+    <footer class="fetes-footer">
+      Étape 4 : le pouvoir et l'architecture
+      <span>|</span>
+      Projet de théorie et histoire de l'urbanisme
+    </footer>
+
+  </div>
+
+</section>

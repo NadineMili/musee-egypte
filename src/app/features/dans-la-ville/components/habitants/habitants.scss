@@ -1,0 +1,296 @@
+
+:host {
+  display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.habitants-page {
+  background: #f7ecd9;
+  min-height: 100vh;
+  padding: 45px max(25px, calc((100vw - 1450px) / 2));
+  color: #30251b;
+}
+
+.back-link {
+  border: 0;
+  background: transparent;
+  color: #245b91;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-bottom: 25px;
+  padding: 0;
+}
+
+.heading {
+  span {
+    color: #b3742d;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+  }
+
+  h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(35px, 4vw, 58px);
+    margin: 12px 0 18px;
+  }
+
+  p {
+    font-size: 18px;
+    color: #745c43;
+    max-width: 950px;
+    line-height: 1.6;
+  }
+}
+
+.profile-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 35px 0;
+
+  button {
+    background: #fffaf3;
+    border: 1px solid #dfd0b9;
+    border-radius: 30px;
+    padding: 13px 23px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #30251b;
+
+    &.active {
+      background: #245b91;
+      color: white;
+      border-color: #245b91;
+    }
+
+    &:hover {
+      border-color: #245b91;
+    }
+  }
+}
+
+.habitants-layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 25px;
+  align-items: start;
+}
+
+.day-panel,
+.journey-panel {
+  background: #fffaf3;
+  border: 1px solid #e1d0b8;
+  border-radius: 14px;
+  padding: 30px;
+}
+
+.eyebrow {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1.7px;
+  color: #245b91;
+}
+
+.day-panel {
+  h2 {
+    font-size: 32px;
+    margin: 12px 0;
+  }
+
+  .intro {
+    color: #705b46;
+    margin-bottom: 25px;
+  }
+}
+
+.day-step {
+  display: flex;
+  gap: 15px;
+  padding: 20px 0;
+  border-top: 1px solid #e3d5c3;
+
+  strong {
+    font-size: 16px;
+  }
+
+  p {
+    color: #705b46;
+    line-height: 1.5;
+    margin: 7px 0 0;
+  }
+
+  &.restricted .step-number {
+    background: transparent;
+    color: #686868;
+    border: 2px dashed #686868;
+  }
+}
+
+.step-number,
+.map-number {
+  width: 32px;
+  height: 32px;
+  background: #245b91;
+  color: white;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+/* CARTE DES DÉPLACEMENTS */
+
+.journey-map {
+  position: relative;
+  background: #e7e3da;
+  min-height: 500px;
+  border-radius: 10px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 0.12fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.map-location {
+  background: #e9e7e1;
+  border: 2px solid #c9c8c3;
+  border-radius: 8px;
+  padding: 15px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 2;
+
+  strong {
+    font-size: 15px;
+  }
+
+  > span:not(.map-number) {
+    font-size: 13px;
+  }
+
+  &.visited {
+    background: #dce8f6;
+    border-color: #245b91;
+  }
+
+  &.restricted {
+    border: 2px dashed #777;
+  }
+}
+
+.map-number {
+  width: 25px;
+  height: 25px;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.temple {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.palace {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.residential {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.administration {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.workshops {
+  grid-column: 3;
+  grid-row: 3;
+}
+
+.map-road {
+  grid-column: 2;
+  grid-row: 1 / 4;
+  background: #245b91;
+  color: #fff;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px 0;
+  font-size: 0;
+  z-index: 1;
+
+  span {
+    background: white;
+    color: #245b91;
+    border-radius: 50%;
+    padding: 7px 11px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+  color: #78634e;
+  font-size: 13px;
+}
+
+.bottom-navigation {
+  margin-top: 30px;
+
+  button {
+    background: #eea12c;
+    border: 0;
+    border-radius: 8px;
+    padding: 15px 25px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 850px) {
+  .habitants-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .habitants-page {
+    padding: 25px 16px;
+  }
+}
+
+@media (max-width: 500px) {
+  .journey-map {
+    min-height: 390px;
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .map-location {
+    padding: 8px;
+
+    strong {
+      font-size: 12px;
+    }
+  }
+
+  .day-panel,
+  .journey-panel {
+    padding: 16px;
+  }
+}

@@ -1,0 +1,1305 @@
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.pouvoir-page {
+  min-height: calc(100vh - 80px);
+  background: #fcf8f0;
+  color: #2b2118;
+  font-family: Arial, Helvetica, sans-serif;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.page-container {
+  width: min(100% - 64px, 1450px);
+  margin: 0 auto;
+}
+
+.standard-screen {
+  padding-top: 34px;
+  padding-bottom: 35px;
+
+  h1 {
+    margin: 12px 0;
+    font: bold clamp(27px, 3vw, 39px)/1.2 Georgia, serif;
+  }
+}
+
+.eyebrow {
+  color: #b56b1e;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.text-back {
+  padding: 5px 0;
+  border: 0;
+  background: transparent;
+  color: #94551e;
+  font-size: 14px;
+  font-weight: 700;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.screen-subtitle {
+  margin: 0 0 23px;
+  color: #a18a72;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.screen-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-height: 49px;
+  padding: 13px 25px;
+  border: 0;
+  border-radius: 12px;
+  background: #f4a12a;
+  color: #21180e;
+  font-size: 14px;
+  font-weight: 800;
+
+  &:hover:not(:disabled) {
+    background: #e9931c;
+  }
+
+  &:disabled {
+    background: #ded7c8;
+    color: #9d9385;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.help-text {
+  color: #9f8b76;
+  font-size: 12px;
+  text-align: center;
+}
+
+.pouvoir-footer {
+  padding-top: 14px;
+  padding-bottom: 22px;
+  color: #a18a72;
+  font-size: 11px;
+
+  span {
+    margin: 0 10px;
+  }
+}
+
+/* ========================================
+   INTRODUCTION
+   ======================================== */
+
+.pouvoir-intro {
+  display: grid;
+  grid-template-columns: 1.2fr 0.95fr;
+  gap: 65px;
+  align-items: start;
+  padding-top: 55px;
+  padding-bottom: 40px;
+}
+
+.intro-content {
+  padding-top: 12px;
+
+  h1 {
+    margin: 25px 0;
+    font: bold clamp(48px, 5vw, 78px)/1.04 Georgia, serif;
+    letter-spacing: -1.5px;
+  }
+}
+
+.intro-quote {
+  max-width: 650px;
+  margin: 25px 0 32px;
+  font: italic clamp(18px, 1.5vw, 23px)/1.55 Georgia, serif;
+}
+
+.visit-duration {
+  margin: 20px 0 55px;
+  color: #b39376;
+  font-size: 12px;
+}
+
+.intro-categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.intro-category {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 88px;
+  padding: 20px 17px;
+  border-radius: 12px;
+  font-size: 13px;
+
+  strong {
+    font-size: 15px;
+  }
+
+  &.vivants {
+    background: #e5b48e;
+  }
+
+  &.dieux {
+    background: #e9ca55;
+  }
+
+  &.morts {
+    background: #a8b1d1;
+  }
+}
+
+.intro-visual {
+  margin: 0;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    border: 1px solid #d9c7a8;
+    border-radius: 4px;
+    background: #efe5d5;
+  }
+
+  figcaption {
+    margin-top: 10px;
+    color: #aa8e70;
+    font-size: 11px;
+    font-style: italic;
+    text-align: center;
+  }
+}
+
+/* ========================================
+   CARTE DE THÈBES
+   ======================================== */
+
+.map-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(310px, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.map-column {
+  min-width: 0;
+}
+
+.layer-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.layer-button {
+  min-width: 120px;
+  padding: 10px 15px;
+  border: 2px solid transparent;
+  border-radius: 25px;
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.55;
+
+  &.vivants {
+    background: #e5b48e;
+  }
+
+  &.dieux {
+    background: #e9ca55;
+  }
+
+  &.morts {
+    background: #a8b1d1;
+  }
+
+  &.active {
+    opacity: 1;
+    border-color: #3b2c1c;
+  }
+}
+
+.show-all {
+  padding: 9px;
+  border: 0;
+  background: transparent;
+  color: #aa6022;
+  font-size: 12px;
+}
+
+.layers-count {
+  margin-left: auto;
+  font-size: 12px;
+}
+
+.thebes-map,
+.fetes-map {
+  position: relative;
+  display: grid;
+  grid-template-columns: 32% 5% 8% 9% 5% 41%;
+  width: 100%;
+  height: 420px;
+  overflow: hidden;
+  background: #e4c590;
+}
+
+.thebes-map button {
+  font-size: 12px;
+}
+
+.map-region {
+  position: relative;
+  margin: 12px 0 12px 12px;
+  border: 2px dashed #34291e;
+  background: #c8b599;
+  text-align: center;
+  transition: opacity 0.2s;
+
+  strong,
+  small {
+    display: block;
+    margin-top: 12px;
+  }
+
+  small {
+    margin-top: 3px;
+    font-size: 10px;
+  }
+}
+
+.muted {
+  opacity: 0.3;
+}
+
+.map-marker {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid #35271b;
+  border-radius: 50%;
+  background: #e5c497;
+}
+
+.marker-six {
+  top: 24%;
+  left: 43%;
+}
+
+.marker-five {
+  bottom: 23%;
+  left: 43%;
+}
+
+.map-sites {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  .map-site {
+    width: 29px;
+    height: 29px;
+    border: 1px solid #392d20;
+    background: #e9ca55;
+    border-radius: 50%;
+  }
+}
+
+.fertile-strip {
+  background: #9ec47c;
+}
+
+.map-nile,
+.fete-nile {
+  display: grid;
+  place-items: center;
+  background: #7eb3d3;
+  color: white;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.map-east {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.map-karnak,
+.map-luxor {
+  display: grid;
+  place-items: center;
+  width: 75%;
+  height: 20%;
+  border: 2px solid #47371f;
+  background: #e9ca55;
+  font-size: 17px !important;
+
+  small {
+    font-size: 10px;
+  }
+}
+
+.map-living {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 44%;
+  border: 2px solid #4a3625;
+  background: #e5b48e;
+  font-size: 12px;
+
+  em {
+    font-size: 10px;
+  }
+}
+
+.map-north {
+  position: absolute;
+  top: 18px;
+  right: 10px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 10px;
+  font-size: 11px;
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  i {
+    width: 12px;
+    height: 12px;
+    border: 1px solid #48382a;
+  }
+
+  .legend-vivants {
+    background: #e5b48e;
+  }
+
+  .legend-dieux {
+    background: #e9ca55;
+  }
+
+  .legend-morts {
+    background: #a8b1d1;
+  }
+}
+
+.map-caption {
+  margin-top: 9px;
+  color: #a28a70;
+  font-size: 10px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.map-info-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid #dec5a2;
+  border-radius: 14px;
+  background: #fffdfa;
+
+  > img {
+    display: block;
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 5px;
+    background: #eee4d3;
+  }
+
+  h2 {
+    margin: 18px 0 10px;
+    font: bold 24px Georgia, serif;
+  }
+
+  > p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .full-width {
+    margin-top: auto;
+  }
+}
+
+.info-rows {
+  display: grid;
+  gap: 7px;
+  margin: 18px 0;
+}
+
+.info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 9px 12px;
+  border-radius: 7px;
+  background: #f6ead8;
+  font-size: 12px;
+
+  strong {
+    color: #ad6420;
+  }
+}
+
+/* ========================================
+   TROIS FICHES
+   ======================================== */
+
+.three-fiches {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.fiche-card {
+  overflow: hidden;
+  border: 1px solid #dfc5a1;
+  border-radius: 14px;
+  background: #fffdfa;
+
+  h2 {
+    margin: 0;
+    padding: 16px 20px;
+    font: bold 29px Georgia, serif;
+  }
+
+  &.vivants h2 {
+    background: #e5b48e;
+  }
+
+  &.dieux h2 {
+    background: #e9ca55;
+  }
+
+  &.morts h2 {
+    background: #a8b1d1;
+  }
+}
+
+.fiche-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 570px;
+  padding: 15px;
+
+  > img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background: #eee5d5;
+  }
+}
+
+.fiche-description {
+  min-height: 115px;
+  margin: 17px 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.fiche-informations {
+  display: grid;
+  gap: 7px;
+  margin-top: auto;
+}
+
+.fiche-info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 13px;
+  border-radius: 8px;
+  background: #f5ead8;
+  font-size: 12px;
+
+  strong {
+    color: #a9611f;
+  }
+}
+
+.screen-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 25px;
+}
+
+/* ========================================
+   TEMPLE DE KARNAK — PLAN ORIGINAL
+   ======================================== */
+
+.temple-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(300px, 1fr);
+  gap: 22px;
+  align-items: stretch;
+}
+
+.temple-left {
+  min-width: 0;
+}
+
+.temple-plan {
+  height: 280px;
+  padding: 22px 14px 15px;
+  overflow: hidden;
+  background: #999690;
+}
+
+.temple-plan-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.plan-zone {
+  position: absolute;
+  display: block;
+  padding: 0;
+  border: 2px solid #29241e;
+  border-radius: 0;
+  color: #16120e;
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(1.12);
+  }
+
+  &.plan-selected {
+    outline: 4px solid #f4a12a;
+    outline-offset: -2px;
+    z-index: 2;
+  }
+}
+
+.zone-label {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 150px;
+  color: #14110e;
+  font-size: 10px;
+  font-weight: 800;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.plan-allee {
+  left: 0;
+  top: 22%;
+  width: 17%;
+  height: 62%;
+  border: none;
+  background: transparent;
+
+  .zone-label {
+    top: 20%;
+  }
+}
+
+.allee-line {
+  position: absolute;
+  top: 54%;
+  left: 0;
+  right: 5%;
+  border-top: 2px dashed #2a261f;
+}
+
+.plan-pylone {
+  left: 17%;
+  top: 14%;
+  width: 5%;
+  height: 76%;
+  background: #625a48;
+}
+
+.plan-cour {
+  left: 22%;
+  top: 14%;
+  width: 27%;
+  height: 76%;
+  background: #a5a195;
+}
+
+.plan-hypostyle {
+  left: 49%;
+  top: 14%;
+  width: 28%;
+  height: 76%;
+  background: #777369;
+}
+
+.plan-offrandes {
+  left: 77%;
+  top: 27%;
+  width: 13%;
+  height: 49%;
+  background: #4c4333;
+}
+
+.plan-sanctuaire {
+  left: 90%;
+  top: 36%;
+  width: 10%;
+  height: 34%;
+  background: #29241e;
+}
+
+.colonnes {
+  position: absolute;
+  inset: 12px 10px;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  pointer-events: none;
+}
+
+.cour-colonnes {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.hypostyle-colonnes {
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.colonne {
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid #26221e;
+  border-radius: 50%;
+  background: #888780;
+}
+
+.temple-caption {
+  margin: 10px 0 20px;
+  color: #a18b73;
+  font-size: 11px;
+  font-style: italic;
+}
+
+.temple-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.temple-prev,
+.temple-next {
+  min-width: 125px;
+  min-height: 42px;
+  padding: 10px 15px;
+  border-radius: 11px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.temple-prev {
+  border: 1px solid #40362c;
+  background: #fffdfa;
+
+  &:disabled {
+    opacity: 0.4;
+  }
+}
+
+.temple-next {
+  border: 0;
+  background: #f4a12a;
+}
+
+.temple-steps {
+  display: flex;
+  gap: 9px;
+
+  button {
+    width: 29px;
+    height: 29px;
+    padding: 0;
+    border: 1px solid #34281d;
+    border-radius: 50%;
+    background: #fffdfa;
+
+    &.active {
+      background: #f4a12a;
+      font-weight: 800;
+    }
+  }
+}
+
+.temple-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.temple-photo {
+  display: block;
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.temple-access {
+  padding: 17px;
+  border: 1px solid #dfc8a5;
+  border-radius: 12px;
+  background: #fffdfa;
+
+  h3 {
+    margin: 0 0 14px;
+    color: #b46a21;
+    font-size: 14px;
+  }
+}
+
+.access-item {
+  margin-bottom: 9px;
+  padding: 10px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.access-yes {
+  background: #d8edd2;
+  color: #278037;
+}
+
+.access-no {
+  background: #f5d9d5;
+  color: #a33329;
+}
+
+.temple-information {
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  border: 1px solid #dfc8a5;
+  border-radius: 14px;
+  background: #fffdfa;
+
+  h2 {
+    margin: 16px 0 12px;
+    font: bold 25px Georgia, serif;
+  }
+
+  h3 {
+    margin: 0 0 12px;
+    color: #a85e1b;
+    font-size: 14px;
+  }
+}
+
+.temple-station-badge {
+  align-self: flex-start;
+  padding: 12px 17px;
+  border-radius: 25px;
+  background: #eaca54;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.station-description {
+  margin: 0 0 25px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.temple-stations {
+  display: grid;
+  gap: 8px;
+
+  button {
+    padding: 12px 14px;
+    border: 0;
+    border-radius: 9px;
+    background: #f5ead8;
+    font-size: 12px;
+    text-align: left;
+
+    &.active {
+      background: #eaca54;
+      font-weight: 800;
+    }
+  }
+}
+
+.temple-note {
+  margin: 28px 0;
+  color: #a18b73;
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.temple-return-map {
+  width: 100%;
+  min-height: 43px;
+  margin-top: auto;
+  border: 1px solid #3a3026;
+  border-radius: 11px;
+  background: #fffdfa;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ========================================
+   FÊTES — BARQUE D'AMON
+   ======================================== */
+
+.fetes-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(310px, 1fr);
+  gap: 24px;
+}
+
+.fetes-map-column {
+  min-width: 0;
+}
+
+.fetes-map {
+  position: relative;
+  grid-template-columns: 33% 5% 8% 9% 5% 40%;
+}
+
+.fete-west {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin: 12px 0 12px 12px;
+  padding: 14px;
+  border: 2px dashed #413426;
+  background: #a8b1d1;
+  font-size: 12px;
+
+  small {
+    font-size: 10px;
+  }
+
+  > span {
+    display: grid;
+    place-items: center;
+    width: 27px;
+    height: 27px;
+    margin-top: 65px;
+    border: 1px solid #30251b;
+    border-radius: 50%;
+    background: #e6c398;
+  }
+}
+
+.fete-sites {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  span {
+    display: grid;
+    place-items: center;
+    width: 29px;
+    height: 29px;
+    border: 1px solid #3a2d20;
+    border-radius: 50%;
+    background: #e9ca55;
+    font-size: 12px;
+  }
+}
+
+.fete-green {
+  background: #9ec47c;
+}
+
+.fete-east {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 12px 20px;
+}
+
+.fete-karnak,
+.fete-luxor {
+  display: grid;
+  place-items: center;
+  width: 80%;
+  height: 18%;
+  border: 2px solid #49361e;
+  background: #e9ca55;
+  font-weight: 800;
+}
+
+.fete-city {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 46%;
+  border: 2px solid #49361e;
+  background: #e5b48e;
+  font-size: 12px;
+
+  small {
+    margin-top: 5px;
+  }
+}
+
+.fete-procession {
+  position: absolute;
+  top: 23%;
+  bottom: 23%;
+  left: 50%;
+  border-left: 2px dashed #c4432d;
+}
+
+.fete-barque {
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #a43824;
+  pointer-events: none;
+
+  .barque-symbol {
+    font-size: 31px;
+  }
+
+  small {
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  &.route-opet {
+    left: 80%;
+    top: 23%;
+    animation: trajet-opet 7s ease-in-out forwards;
+  }
+
+  &.route-vallee {
+    left: 80%;
+    top: 45%;
+    animation: trajet-vallee 7s ease-in-out forwards;
+  }
+}
+
+@keyframes trajet-opet {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(215px);
+  }
+}
+
+@keyframes trajet-vallee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-380px);
+  }
+}
+
+.fetes-information {
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  border: 1px solid #dfc8a5;
+  border-radius: 14px;
+  background: #fffdfa;
+
+  h2 {
+    margin: 24px 0 10px;
+    font: bold 23px Georgia, serif;
+  }
+
+  > p:not(.fetes-note) {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+}
+
+.fetes-choices {
+  display: grid;
+  gap: 12px;
+
+  button {
+    min-height: 55px;
+    padding: 12px;
+    border: 2px solid transparent;
+    border-radius: 30px;
+    background: #cdd0df;
+    color: #746c64;
+    font-size: 16px;
+    font-weight: 700;
+
+    &.active {
+      border-color: #34271a;
+      background: #e9ca55;
+      color: #2b2118;
+    }
+  }
+}
+
+.fetes-note {
+  margin-top: auto;
+  padding-top: 40px;
+  color: #a18a72;
+  font-size: 11px;
+  font-style: italic;
+}
+
+.fetes-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 20px;
+
+  > button {
+    flex: 1;
+  }
+}
+
+.secondary-button {
+  min-height: 45px;
+  padding: 10px 15px;
+  border: 1px solid #40362c;
+  border-radius: 12px;
+  background: #fffdfa;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.sun-track {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 13px;
+  font-size: 12px;
+}
+
+.sun-line {
+  position: relative;
+  flex: 1;
+  height: 2px;
+  background: #a48a6e;
+
+  span {
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #3a2a1b;
+    border-radius: 50%;
+    background: #f4a12a;
+  }
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 1100px) {
+  .pouvoir-intro,
+  .map-layout,
+  .temple-layout,
+  .fetes-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-visual img {
+    height: 400px;
+  }
+
+  .three-fiches {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .temple-return-map {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 700px) {
+  .page-container {
+    width: min(100% - 30px, 1450px);
+  }
+
+  .pouvoir-intro {
+    gap: 30px;
+    padding-top: 30px;
+  }
+
+  .intro-content h1 {
+    font-size: 45px;
+  }
+
+  .intro-categories,
+  .three-fiches,
+  .temple-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-visual img {
+    height: 290px;
+  }
+
+  .screen-topline {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .thebes-map,
+  .fetes-map {
+    height: 310px;
+  }
+
+  .map-living {
+    font-size: 9px;
+  }
+
+  .map-karnak,
+  .map-luxor {
+    font-size: 12px !important;
+  }
+
+  .map-region strong,
+  .map-region small {
+    font-size: 9px;
+  }
+
+  .layer-button {
+    min-width: 90px;
+    padding: 8px;
+  }
+
+  .temple-plan {
+    height: 230px;
+    padding: 22px 8px 8px;
+  }
+
+  .zone-label {
+    font-size: 8px;
+  }
+
+  .colonne {
+    width: 8px;
+    height: 8px;
+  }
+
+  .temple-navigation {
+    flex-wrap: wrap;
+  }
+
+  .temple-steps {
+    order: -1;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .temple-prev,
+  .temple-next {
+    flex: 1;
+  }
+
+  .temple-photo {
+    height: 220px;
+  }
+
+  .fetes-actions {
+    flex-direction: column;
+  }
+
+  .fete-barque.route-vallee {
+    animation-name: trajet-vallee-mobile;
+  }
+
+  @keyframes trajet-vallee-mobile {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-190px);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fete-barque {
+    animation-duration: 0.01ms !important;
+  }
+}

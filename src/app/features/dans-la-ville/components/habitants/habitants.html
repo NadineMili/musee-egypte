@@ -1,0 +1,166 @@
+
+<section class="habitants-page">
+
+  <button class="back-link" (click)="retour.emit()">
+    ← Retour aux habitations
+  </button>
+
+  <header class="heading">
+
+    <span>ÉTAPE 3 · {{ ville() }}</span>
+
+    <h1>Voir la ville à travers ses habitants</h1>
+
+    <p>
+      La ville n'est pas vécue de la même manière par tous.
+      Ces profils sont fictifs : des reconstitutions pédagogiques,
+      pas des biographies historiques.
+    </p>
+
+  </header>
+
+  <!-- PROFILS -->
+  <div class="profile-selector">
+
+    @for (profil of profils; track profil.id) {
+
+      <button
+        [class.active]="profilActif() === profil.id"
+        (click)="choisirProfil(profil.id)"
+      >
+        {{ profil.label }}
+      </button>
+
+    }
+
+  </div>
+
+  <!-- JOURNÉE ET CARTE -->
+  <div class="habitants-layout">
+
+    <!-- JOURNÉE -->
+    <article class="day-panel">
+
+      <span class="eyebrow">UNE JOURNÉE</span>
+
+      <h2>{{ profilSelectionne().nom }}</h2>
+
+      <p class="intro">
+        {{ profilSelectionne().introduction }}
+      </p>
+
+      <div class="day-steps">
+
+        @for (
+            etape of profilSelectionne().etapes;
+          track etape.numero
+          ) {
+
+          <div
+            class="day-step"
+            [class.restricted]="!etape.accessible"
+          >
+
+            <span class="step-number">
+              {{ etape.numero }}
+            </span>
+
+            <div>
+              <strong>{{ etape.lieu }}</strong>
+              <p>{{ etape.description }}</p>
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+    </article>
+
+    <!-- CARTE -->
+    <article class="journey-panel">
+
+      <div class="journey-map">
+
+        <div
+          class="map-location temple"
+          [class.visited]="lieuFrequent('Temple')"
+        >
+          @if (numeroLieu('Temple'); as numero) {
+            <span class="map-number">{{ numero }}</span>
+          }
+
+          <strong>
+            {{ ville() === 'Amarna'
+            ? "Temples d'Aton"
+            : ville() === 'Thèbes'
+              ? 'Temples de Karnak'
+              : 'Temple de Ptah' }}
+          </strong>
+        </div>
+
+        <div class="map-location palace restricted">
+          <strong>Palais royal</strong>
+          <span>Accès limité</span>
+        </div>
+
+        <div
+          class="map-location residential"
+          [class.visited]="lieuFrequent('Quartier résidentiel')"
+        >
+          @if (numeroLieu('Quartier résidentiel'); as numero) {
+            <span class="map-number">{{ numero }}</span>
+          }
+
+          <strong>Quartier résidentiel</strong>
+        </div>
+
+        <div
+          class="map-location administration"
+          [class.visited]="lieuFrequent('Administration') || lieuFrequent('Réserves')"
+        >
+          @if (numeroLieu('Administration'); as numero) {
+            <span class="map-number">{{ numero }}</span>
+          }
+
+          <strong>Administration</strong>
+        </div>
+
+        <div
+          class="map-location workshops"
+          [class.visited]="lieuFrequent('Ateliers') || lieuFrequent('Marché')"
+        >
+          @if (numeroLieu('Ateliers'); as numero) {
+            <span class="map-number">{{ numero }}</span>
+          }
+
+          <strong>Ateliers et marché</strong>
+        </div>
+
+        <div class="map-road">
+          <span>2</span>
+          Axe principal
+        </div>
+
+      </div>
+
+      <div class="legend">
+        <span>Bleu : espace fréquenté</span>
+        <span>Pointillés : accès limité</span>
+        <span>Gris : non fréquenté</span>
+      </div>
+
+    </article>
+
+  </div>
+
+  <div class="bottom-navigation">
+
+    <button (click)="retour.emit()">
+      ← Retour aux habitations
+    </button>
+
+  </div>
+
+</section>

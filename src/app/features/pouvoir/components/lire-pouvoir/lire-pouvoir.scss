@@ -1,0 +1,501 @@
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.lecture-page {
+  min-height: calc(100vh - 80px);
+  background: #fcf8f0;
+  color: #2b2118;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.lecture-container {
+  width: min(100%, 1750px);
+  margin: 0 auto;
+  padding: 32px 35px 24px;
+}
+
+/* =========================================
+   EN-TÊTE
+========================================= */
+
+.lecture-header {
+  margin-bottom: 26px;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+.back-link {
+  padding: 5px 0;
+  background: transparent;
+  border: none;
+  color: #94551e;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.step-label {
+  color: #b66b1d;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.lecture-header h1 {
+  margin: 0 0 12px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(29px, 3vw, 43px);
+  line-height: 1.2;
+  color: #2b2118;
+}
+
+.header-description {
+  margin: 0;
+  color: #a18a72;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* =========================================
+   DISPOSITION PRINCIPALE
+========================================= */
+
+.lecture-layout {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.9fr)
+    minmax(350px, 1fr);
+  gap: 26px;
+  align-items: start;
+}
+
+.lecture-image-panel {
+  min-width: 0;
+}
+
+/* =========================================
+   IMAGE INTERACTIVE
+========================================= */
+
+.image-interactive {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  aspect-ratio: 1.34 / 1;
+  overflow: hidden;
+  background: #f3dfb8;
+  border: 2px dashed #c8b99e;
+  border-radius: 4px;
+}
+
+.pylone-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/*
+  Masque du texte déjà dessiné
+  dans finaaaal.png.
+
+  Les dimensions sont approximatives.
+  Elles peuvent être ajustées selon
+  l'image originale.
+*/
+
+.image-text-mask {
+  position: absolute;
+  z-index: 2;
+
+  top: 1.5%;
+  left: 54%;
+
+  width: 45%;
+  height: 18%;
+
+  background: #f5dfb4;
+  pointer-events: none;
+}
+
+/* =========================================
+   ZONES CLIQUABLES INVISIBLES
+========================================= */
+
+.image-point {
+  position: absolute;
+  z-index: 3;
+
+  width: 6%;
+  aspect-ratio: 1;
+
+  transform: translate(-50%, -50%);
+
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 50%;
+
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.image-point:hover {
+  border-color: #f3a12b;
+  box-shadow: 0 0 0 4px rgba(243, 161, 43, 0.18);
+}
+
+.image-point.active {
+  border-color: #fff;
+  box-shadow: 0 0 0 3px #f3a12b;
+}
+
+.image-point:focus-visible {
+  outline: 3px solid #f3a12b;
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.image-caption {
+  margin: 11px 0 0;
+  color: #a18b73;
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* =========================================
+   PANNEAU DE DROITE
+========================================= */
+
+.lecture-information {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 21px;
+  background: #fffdfa;
+  border: 1px solid #dfc8a5;
+  border-radius: 16px;
+}
+
+.progress-header {
+  margin-bottom: 22px;
+}
+
+.progress-header strong {
+  display: block;
+  margin-bottom: 13px;
+  color: #2d2118;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+  overflow: hidden;
+  background: #f2e8d8;
+  border-radius: 20px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #f3a12b;
+  border-radius: 20px;
+  transition: width 0.3s ease;
+}
+
+/* =========================================
+   LISTE DES CINQ SIGNES
+========================================= */
+
+.signes-list {
+  display: grid;
+  gap: 12px;
+}
+
+.signe-card {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  width: 100%;
+  min-height: 84px;
+  padding: 14px 15px;
+
+  background: #f5ead8;
+  border: 2px solid transparent;
+  border-radius: 12px;
+
+  color: #2c2118;
+  text-align: left;
+  cursor: pointer;
+
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
+}
+
+.signe-card:hover {
+  transform: translateY(-1px);
+}
+
+.signe-card.discovered {
+  background: #d7ecd2;
+}
+
+.signe-card.selected {
+  border-color: #f3a12b;
+}
+
+.signe-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 34px;
+
+  width: 34px;
+  height: 34px;
+
+  background: #f3a12b;
+  border: 1.5px solid #342619;
+  border-radius: 50%;
+
+  color: #23190e;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.signe-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.signe-text strong {
+  color: #2c2118;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.signe-text small {
+  color: #3c3025;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.signe-status {
+  flex-shrink: 0;
+  color: #8e7c68;
+  font-size: 11px;
+}
+
+.signe-card.discovered .signe-status {
+  color: #34813b;
+  font-weight: 800;
+}
+
+/* =========================================
+   EXPLICATION DU SIGNE SÉLECTIONNÉ
+========================================= */
+
+.explanation-panel {
+  margin-top: 18px;
+  padding: 17px 18px;
+
+  background: #fff5e5;
+  border: 1px solid #e8c68f;
+  border-left: 4px solid #f3a12b;
+  border-radius: 10px;
+}
+
+.explanation-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.explanation-heading strong {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #372517;
+}
+
+.explanation-close {
+  flex-shrink: 0;
+  padding: 0 3px;
+  background: transparent;
+  border: none;
+  color: #75543a;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.explanation-panel p {
+  margin: 10px 0 0;
+  color: #4b392b;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+/* =========================================
+   BOUTON SUIVANT
+========================================= */
+
+.next-button {
+  width: 100%;
+  min-height: 51px;
+  margin-top: 18px;
+  padding: 13px 18px;
+
+  background: #f3a12b;
+  border: none;
+  border-radius: 12px;
+
+  color: #251a0e;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+
+  transition: background 0.2s;
+}
+
+.next-button:hover:not(:disabled) {
+  background: #e38e1a;
+}
+
+.next-button:disabled {
+  background: #ded6c7;
+  color: #9d9385;
+  cursor: not-allowed;
+}
+
+.progress-help {
+  margin: 11px 0 0;
+  color: #a18b73;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* =========================================
+   PIED DE PAGE
+========================================= */
+
+.lecture-footer {
+  margin-top: 25px;
+  color: #a48d75;
+  font-size: 11px;
+}
+
+.lecture-footer span {
+  margin: 0 10px;
+}
+
+/* =========================================
+   RESPONSIVE TABLETTE
+========================================= */
+
+@media (max-width: 1100px) {
+
+  .lecture-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .lecture-container {
+    padding: 26px 24px;
+  }
+
+}
+
+/* =========================================
+   RESPONSIVE MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+  .lecture-container {
+    padding: 22px 15px;
+  }
+
+  .header-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .lecture-header h1 {
+    font-size: 29px;
+  }
+
+  .lecture-layout {
+    gap: 18px;
+  }
+
+  .image-interactive {
+    aspect-ratio: 1.15 / 1;
+  }
+
+  .image-point {
+    width: 9%;
+  }
+
+  .lecture-information {
+    padding: 14px;
+  }
+
+  .signe-card {
+    min-height: 75px;
+    padding: 11px;
+  }
+
+  .signe-text strong {
+    font-size: 13px;
+  }
+
+  .signe-text small {
+    font-size: 11px;
+  }
+
+  .lecture-footer {
+    line-height: 1.7;
+  }
+
+}

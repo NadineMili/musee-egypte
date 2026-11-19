@@ -1,1 +1,370 @@
-<p>dans-la-ville works!</p>
+
+@if (sousEcran() === 'habitations') {
+
+  <app-habitations
+    [ville]="planActif().nom"
+    (retour)="retourAuPlan()"
+    (voirHabitants)="ouvrirHabitants()"
+  />
+
+} @else if (sousEcran() === 'habitants') {
+
+  <app-habitants
+    [ville]="planActif().nom"
+    (retour)="retourAuxHabitations()"
+  />
+
+} @else {
+
+  <section class="exploration-page">
+
+    <div class="exploration-container">
+
+      <!-- EN-TÊTE -->
+      <header class="page-heading">
+
+      <span class="eyebrow">
+        ÉTAPE 3 SUR 5 — EXPLORATION URBAINE
+      </span>
+
+        <h1>Explorer la ville</h1>
+
+        <p>
+          Découvrez comment les habitants vivaient et
+          comment les espaces urbains étaient organisés
+          dans l'Égypte antique.
+        </p>
+
+      </header>
+
+      <!-- SÉLECTION DES VILLES -->
+      <section class="city-selector">
+
+        <div class="city-selector-heading">
+
+          <span>CHOISISSEZ UNE VILLE</span>
+
+          <h2>{{ planActif().nom }}</h2>
+
+          <p>{{ planActif().sousTitre }}</p>
+
+        </div>
+
+        <div class="city-selector-buttons">
+
+          @for (item of villes; track item) {
+
+            <button
+              type="button"
+              [class.active]="ville() === item"
+              [attr.aria-pressed]="ville() === item"
+              (click)="choisirVille(item)"
+            >
+              {{ nomVille(item) }}
+            </button>
+
+          }
+
+        </div>
+
+      </section>
+
+      <!-- INTRODUCTION -->
+      <p class="city-introduction">
+        {{ planActif().introduction }}
+      </p>
+
+      <p class="exploration-instruction">
+        Choisissez un espace à gauche ou cliquez
+        directement sur une zone du plan.
+      </p>
+
+      <!-- INTERFACE PRINCIPALE -->
+      <div class="exploration-layout">
+
+        <!-- COLONNE GAUCHE -->
+        <aside
+          class="spaces-panel"
+          aria-label="Espaces à explorer"
+        >
+
+          @for (item of espaces; track item) {
+
+            <button
+              type="button"
+              class="space-button"
+              [class.active]="espaceSelectionne(item)"
+              [attr.aria-pressed]="espaceSelectionne(item)"
+              (click)="choisirEspace(item)"
+            >
+
+              <strong>
+                {{ planActif().zones[item].titre }}
+              </strong>
+
+              <span>
+              {{ planActif().zones[item].question }}
+            </span>
+
+            </button>
+
+          }
+
+        </aside>
+
+        <!-- COLONNE CENTRALE -->
+        <div class="map-panel">
+
+          <div class="map-panel-heading">
+
+            <span>VUE AÉRIENNE</span>
+
+            <h3>
+              Plan de {{ planActif().nom }}
+            </h3>
+
+          </div>
+
+          <div
+            class="city-map"
+            [class.map-memphis]="ville() === 'memphis'"
+            [class.map-thebes]="ville() === 'thebes'"
+            [class.map-amarna]="ville() === 'amarna'"
+          >
+
+            <!-- TEMPLE -->
+            <button
+              type="button"
+              class="map-zone zone-temple"
+              [class.selected]="espaceSelectionne('religion')"
+              (click)="choisirEspace('religion')"
+            >
+
+              <strong>
+                {{ planActif().zones.religion.titre }}
+              </strong>
+
+              <span>
+              {{
+                  ville() === 'memphis'
+                    ? 'Ptah'
+                    : ville() === 'thebes'
+                      ? 'Karnak et Louxor'
+                      : 'Aton'
+                }}
+            </span>
+
+            </button>
+
+            <!-- PALAIS -->
+            <button
+              type="button"
+              class="map-zone zone-palace"
+              [class.selected]="espaceSelectionne('pouvoir')"
+              (click)="choisirEspace('pouvoir')"
+            >
+
+              <strong>
+                {{ planActif().zones.pouvoir.titre }}
+              </strong>
+
+              <span>Pouvoir</span>
+
+            </button>
+
+            <!-- HABITATIONS -->
+            <button
+              type="button"
+              class="map-zone zone-habitat"
+              [class.selected]="espaceSelectionne('habitat')"
+              (click)="choisirEspace('habitat')"
+            >
+
+              <strong>
+                {{ planActif().zones.habitat.titre }}
+              </strong>
+
+              <div class="houses">
+
+                @for (
+                    house of [1,2,3,4,5,6,7,8,9,10,11,12];
+                  track house
+                  ) {
+
+                  <span class="house"></span>
+
+                }
+
+              </div>
+
+            </button>
+
+            <!-- ADMINISTRATION -->
+            <button
+              type="button"
+              class="map-zone zone-admin"
+              [class.selected]="espaceSelectionne('administration')"
+              (click)="choisirEspace('administration')"
+            >
+
+              <strong>Administration</strong>
+
+            </button>
+
+            <!-- ATELIERS -->
+            <button
+              type="button"
+              class="map-zone zone-workshops"
+              [class.selected]="espaceSelectionne('administration')"
+              (click)="choisirEspace('administration')"
+            >
+
+              <strong>
+                Ateliers et réserves
+              </strong>
+
+            </button>
+
+            <!-- RUE PRINCIPALE -->
+            <button
+              type="button"
+              class="map-road road-horizontal"
+              [class.selected]="espaceSelectionne('circulation')"
+              (click)="choisirEspace('circulation')"
+            >
+
+              {{
+                ville() === 'amarna'
+                  ? 'Voie royale'
+                  : 'Rue principale'
+              }}
+
+            </button>
+
+            <!-- AXE VERTICAL -->
+            <button
+              type="button"
+              class="map-road road-vertical"
+              [class.selected]="espaceSelectionne('circulation')"
+              aria-label="Explorer les voies de circulation"
+              (click)="choisirEspace('circulation')"
+            ></button>
+
+          </div>
+
+          <p class="map-caption">
+            Reconstitution pédagogique schématique,
+            non à l'échelle.
+          </p>
+
+          <div class="map-legend">
+
+          <span>
+            <i class="legend-habitat"></i>
+            Habitations
+          </span>
+
+            <span>
+            <i class="legend-temple"></i>
+            Temples
+          </span>
+
+            <span>
+            <i class="legend-palace"></i>
+            Palais
+          </span>
+
+            <span>
+            <i class="legend-admin"></i>
+            Administration
+          </span>
+
+          </div>
+
+        </div>
+
+        <!-- COLONNE DROITE -->
+        <aside class="information-panel">
+
+        <span class="information-badge">
+          Reconstitution pédagogique
+        </span>
+
+          <h2>
+            {{ espaceActif().titre }}
+          </h2>
+
+          <div class="information-category">
+            FONCTION URBAINE
+          </div>
+
+          <div class="information-description">
+
+            <strong>
+              {{ espaceActif().fonction }}
+            </strong>
+
+            <p>
+              {{ espaceActif().description }}
+            </p>
+
+          </div>
+
+          <div class="discover-heading">
+            À DÉCOUVRIR
+          </div>
+
+          <ol class="discover-list">
+
+            @for (
+                item of espaceActif().decouvertes;
+              track $index
+              ) {
+
+              <li>
+
+              <span class="discover-number">
+                {{ $index + 1 }}
+              </span>
+
+                <span>{{ item }}</span>
+
+              </li>
+
+            }
+
+          </ol>
+
+          <!-- EXPLORER LES HABITATIONS -->
+          @if (espaceSelectionne('habitat')) {
+
+            <button
+              type="button"
+              class="btn-explorer-habitation"
+              (click)="ouvrirHabitations()"
+            >
+              Explorer une habitation
+              <span aria-hidden="true">→</span>
+            </button>
+
+          }
+
+          <div class="information-footer">
+
+            <span>VILLE EXPLORÉE</span>
+
+            <strong>
+              {{ planActif().nom }}
+            </strong>
+
+          </div>
+
+        </aside>
+
+      </div>
+
+    </div>
+
+  </section>
+
+}

@@ -1,0 +1,707 @@
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.fetes-page {
+  min-height: calc(100vh - 80px);
+  background: #fcf8f0;
+  color: #2c2118;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.fetes-container {
+  width: min(100%, 1550px);
+  margin: 0 auto;
+  padding: 30px 38px 20px;
+}
+
+/* EN-TÊTE */
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.back-link {
+  padding: 5px 0;
+  border: none;
+  background: transparent;
+  color: #94551e;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.step-label {
+  color: #b66b1d;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+.fetes-header {
+  margin-bottom: 23px;
+}
+
+.fetes-header h1 {
+  margin: 0 0 10px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(28px, 2.6vw, 38px);
+  line-height: 1.2;
+}
+
+.fetes-header p {
+  margin: 0;
+  color: #a18a72;
+  font-size: 14px;
+}
+
+/* DISPOSITION */
+
+.fetes-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(340px, 1fr);
+  gap: 26px;
+  align-items: stretch;
+}
+
+.carte-section {
+  min-width: 0;
+}
+
+/* CARTE DE THÈBES */
+
+.carte-thebes {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.55 / 1;
+  overflow: hidden;
+  background: #e4c492;
+  border: 1px solid #dbc39e;
+}
+
+.zone-morts {
+  position: absolute;
+  top: 3%;
+  bottom: 3%;
+  left: 1.5%;
+  width: 32%;
+  background: #aab3d3;
+  border: 2px dashed #514f54;
+  text-align: center;
+  padding-top: 12px;
+}
+
+.zone-morts > strong {
+  display: block;
+  font-size: 12px;
+}
+
+.zone-morts > small {
+  display: block;
+  margin-top: 3px;
+  font-size: 10px;
+}
+
+.repere {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 1.5px solid #39291a;
+  border-radius: 50%;
+  background: #eacb75;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.zone-morts .repere {
+  position: absolute;
+  left: 40%;
+}
+
+.mort-6 {
+  top: 14%;
+}
+
+.mort-5 {
+  top: 65%;
+}
+
+/* MONUMENTS OUEST */
+
+.monuments-ouest {
+  position: absolute;
+  top: 20%;
+  bottom: 8%;
+  left: 32%;
+  width: 6%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 2;
+}
+
+.monument {
+  width: 27px;
+  height: 27px;
+  border-radius: 0;
+  background: #efcf61;
+}
+
+.m7 {
+  background: #e5b68d;
+}
+
+/* NIL ET TERRES FERTILES */
+
+.rive-fertile {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: #9fc47c;
+}
+
+.rive-ouest {
+  left: 38%;
+  width: 8%;
+}
+
+.nil {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 46%;
+  width: 10%;
+  background: #7eb2d2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nil span {
+  color: white;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.rive-est {
+  left: 56%;
+  width: 6%;
+}
+
+/* VILLE DES VIVANTS */
+
+.zone-vivants {
+  position: absolute;
+  left: 63%;
+  top: 35%;
+  width: 35%;
+  height: 54%;
+  background: #e5b58f;
+  border: 1.5px solid #4c3926;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zone-vivants > span {
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.zone-vivants small {
+  display: block;
+}
+
+/* TEMPLES */
+
+.temple {
+  position: absolute;
+  left: 69%;
+  width: 24%;
+  background: #ebca5a;
+  border: 1.5px solid #4a3927;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.karnak {
+  top: 12%;
+  height: 20%;
+}
+
+.louxor {
+  top: 90%;
+  height: 8%;
+}
+
+.avenue-sphinx {
+  position: absolute;
+  left: 80%;
+  top: 39%;
+  height: 49%;
+  border-left: 2px dashed #75462e;
+  padding-left: 8px;
+  font-size: 10px;
+  font-style: italic;
+  z-index: 1;
+}
+
+/* NORD */
+
+.nord {
+  position: absolute;
+  right: 1%;
+  top: 4%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.nord-fleche {
+  font-size: 20px;
+}
+
+/* TRAJETS ANIMÉS */
+
+.trajet {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.trajet-opet {
+  left: 80%;
+  top: 27%;
+  width: 0;
+  height: 63%;
+  border-left: 2px dashed rgba(145, 51, 31, 0.35);
+}
+
+.trajet-opet .trajet-progress {
+  position: absolute;
+  left: -2px;
+  top: 0;
+  width: 0;
+  border-left: 3px dashed #bf3927;
+}
+
+.trajet-vallee {
+  left: 23%;
+  top: 62%;
+  width: 57%;
+  height: 0;
+  border-top: 2px dashed rgba(145, 51, 31, 0.35);
+}
+
+.trajet-vallee .trajet-progress {
+  position: absolute;
+  right: 0;
+  top: -2px;
+  height: 0;
+  border-top: 3px dashed #bf3927;
+}
+
+/* BARQUE */
+
+.barque {
+  position: absolute;
+  z-index: 5;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  pointer-events: none;
+}
+
+.barque-symbole {
+  font-size: 29px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.18));
+}
+
+.barque-label {
+  white-space: nowrap;
+  color: #a93b20;
+  font-size: 11px;
+  font-weight: 800;
+  text-shadow: 0 1px 2px #fff1d8;
+}
+
+.barque-active .barque-symbole {
+  animation: flottement 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes flottement {
+  from {
+    transform: translateY(-2px) rotate(-3deg);
+  }
+
+  to {
+    transform: translateY(3px) rotate(3deg);
+  }
+}
+
+/* LÉGENDE */
+
+.carte-legende {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 12px;
+}
+
+.carte-legende span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.carte-legende i {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 1px solid #514236;
+}
+
+.legende-vivants {
+  background: #e5b58f;
+}
+
+.legende-dieux {
+  background: #ebca5a;
+}
+
+.legende-morts {
+  background: #aab3d3;
+}
+
+.carte-note {
+  margin: 8px 0 13px;
+  color: #8b7660;
+  font-size: 10px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* CURSEUR DU SOLEIL */
+
+.soleil-section {
+  margin-top: 10px;
+}
+
+.soleil-titres {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 12px;
+}
+
+.soleil-titres span {
+  color: #967a5d;
+}
+
+.soleil-curseur {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.soleil-curseur > span {
+  flex-shrink: 0;
+  font-size: 11px;
+}
+
+.soleil-track {
+  position: relative;
+  flex: 1;
+  height: 2px;
+  background: #b18b5f;
+}
+
+.soleil-indicateur {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: left 40ms linear;
+}
+
+.soleil-indicateur span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid #5b3a15;
+  border-radius: 50%;
+  background: #f5a12b;
+  font-size: 18px;
+}
+
+/* PANNEAU DE DROITE */
+
+.fetes-information {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 22px;
+  background: #fffdfa;
+  border: 1px solid #dfc8a5;
+  border-radius: 15px;
+}
+
+.fetes-choix {
+  display: grid;
+  gap: 12px;
+}
+
+.fete-bouton {
+  min-height: 55px;
+  padding: 12px;
+  border: 2px solid transparent;
+  border-radius: 35px;
+  color: #8b7867;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.fete-bouton:hover {
+  transform: translateY(-2px);
+}
+
+.fete-bouton.opet {
+  background: #eaca5a;
+}
+
+.fete-bouton.vallee {
+  background: #c6cbe0;
+}
+
+.fete-bouton.active {
+  border-color: #3d2c1c;
+  color: #21170d;
+}
+
+.fetes-descriptions {
+  display: grid;
+  gap: 20px;
+  margin-top: 26px;
+}
+
+.fete-description {
+  min-height: 95px;
+  color: #a18a72;
+  font-size: 13px;
+  line-height: 1.6;
+  opacity: 0.75;
+}
+
+.fete-description strong {
+  font-weight: 800;
+}
+
+.fete-description.description-active {
+  color: #2b2118;
+  opacity: 1;
+}
+
+.animation-status {
+  min-height: 26px;
+  margin-top: 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.status-running {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ad6b20;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #f3a12b;
+  animation: pulsation 1s infinite alternate;
+}
+
+@keyframes pulsation {
+  from { opacity: 0.3; }
+  to { opacity: 1; }
+}
+
+.status-complete {
+  color: #388343;
+}
+
+.fetes-nuance {
+  margin: auto 0 16px;
+  padding-top: 18px;
+  color: #a18a72;
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.fetes-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.rejouer-button,
+.suite-button {
+  min-height: 45px;
+  padding: 11px 13px;
+  border-radius: 13px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.rejouer-button {
+  background: #fffdfa;
+  border: 1.5px solid #493728;
+  color: #2c2118;
+}
+
+.rejouer-button:hover {
+  background: #f6ead7;
+}
+
+.suite-button {
+  background: #f3a12b;
+  border: none;
+  color: #21170d;
+}
+
+.suite-button:hover {
+  background: #e5911b;
+}
+
+/* PIED DE PAGE */
+
+.fetes-footer {
+  margin-top: 25px;
+  color: #a48d75;
+  font-size: 11px;
+}
+
+.fetes-footer span {
+  margin: 0 10px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+  .fetes-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .fetes-information {
+    min-height: 350px;
+  }
+
+  .fetes-nuance {
+    margin-top: 25px;
+  }
+}
+
+@media (max-width: 650px) {
+  .fetes-container {
+    padding: 22px 14px;
+  }
+
+  .header-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fetes-header h1 {
+    font-size: 29px;
+  }
+
+  .carte-thebes {
+    aspect-ratio: 1.15 / 1;
+  }
+
+  .zone-morts > strong,
+  .zone-vivants > span {
+    font-size: 9px;
+  }
+
+  .zone-morts > small,
+  .avenue-sphinx {
+    font-size: 8px;
+  }
+
+  .repere {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+
+  .barque-symbole {
+    font-size: 22px;
+  }
+
+  .barque-label {
+    font-size: 9px;
+  }
+
+  .soleil-curseur {
+    gap: 8px;
+  }
+
+  .soleil-curseur > span {
+    font-size: 9px;
+  }
+
+  .fetes-information {
+    padding: 15px;
+  }
+
+  .fetes-actions {
+    gap: 9px;
+  }
+
+  .rejouer-button,
+  .suite-button {
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .barque-active .barque-symbole,
+  .status-dot {
+    animation: none;
+  }
+}

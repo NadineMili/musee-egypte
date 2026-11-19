@@ -1,0 +1,220 @@
+
+<section class="lecture-page">
+
+  <div class="lecture-container">
+
+    <!-- EN-TÊTE -->
+    <header class="lecture-header">
+
+      <div class="header-top">
+        <button
+          type="button"
+          class="back-link"
+          (click)="retourTemple()"
+        >
+          ← Retour au temple de Karnak
+        </button>
+
+        <span class="step-label">
+          ÉTAPE 4 SUR 5 — LE POUVOIR ET L'ARCHITECTURE
+        </span>
+      </div>
+
+      <h1>
+        Comment le pouvoir se lit-il dans la pierre ?
+      </h1>
+
+      <p class="header-description">
+        Clique sur les points numérotés de l'image pour repérer
+        cinq signes du pouvoir.
+      </p>
+
+    </header>
+
+    <!-- IMAGE ET PANNEAU -->
+    <div class="lecture-layout">
+
+      <!-- IMAGE INTERACTIVE -->
+      <div class="lecture-image-panel">
+
+        <div class="image-interactive">
+
+          <img
+            src="/images/territoire/finaaaal.png"
+            alt="Pylône monumental d'un temple de l'Égypte antique"
+            class="pylone-image"
+          >
+
+          <!--
+            Masque du texte n°4 déjà présent
+            dans l'illustration originale.
+          -->
+          <div
+            class="image-text-mask"
+            aria-hidden="true"
+          ></div>
+
+          <!--
+            Les numéros existent déjà sur l'image.
+            On ajoute seulement des zones cliquables
+            transparentes pour éviter les doublons.
+          -->
+          @for (signe of signes; track signe.id) {
+
+            <button
+              type="button"
+              class="image-point"
+              [class.discovered]="estDecouvert(signe.id)"
+              [class.active]="signeActif?.id === signe.id"
+              [style.left.%]="signe.positionX"
+              [style.top.%]="signe.positionY"
+              [attr.aria-label]="'Découvrir : ' + signe.titre"
+              [attr.aria-pressed]="signeActif?.id === signe.id"
+              (click)="selectionnerSigne(signe)"
+            >
+              <span class="sr-only">
+                {{ signe.id }}. {{ signe.titre }}
+              </span>
+            </button>
+
+          }
+
+        </div>
+
+        <p class="image-caption">
+          Illustration pédagogique d'un pylône égyptien.
+          Clique sur les numéros pour découvrir les signes du pouvoir.
+        </p>
+
+      </div>
+
+      <!-- PANNEAU DE DROITE -->
+      <aside class="lecture-information">
+
+        <div class="progress-header">
+
+          <strong>
+            Signes repérés : {{ nombreDecouverts }}/5
+          </strong>
+
+          <div
+            class="progress-track"
+            role="progressbar"
+            [attr.aria-valuenow]="nombreDecouverts"
+            aria-valuemin="0"
+            aria-valuemax="5"
+            aria-label="Signes du pouvoir découverts"
+          >
+            <div
+              class="progress-fill"
+              [style.width.%]="progression"
+            ></div>
+          </div>
+
+        </div>
+
+        <!-- LISTE DES CINQ SIGNES -->
+        <div class="signes-list">
+
+          @for (signe of signes; track signe.id) {
+
+            <button
+              type="button"
+              class="signe-card"
+              [class.discovered]="estDecouvert(signe.id)"
+              [class.selected]="signeActif?.id === signe.id"
+              (click)="selectionnerSigne(signe)"
+            >
+
+              <span class="signe-number">
+                {{ signe.id }}
+              </span>
+
+              <span class="signe-text">
+
+                <strong>
+                  {{ signe.titre }}
+                </strong>
+
+                <small>
+                  {{ signe.sousTitre }}
+                </small>
+
+              </span>
+
+              <span class="signe-status">
+                @if (estDecouvert(signe.id)) {
+                  vu
+                } @else {
+                  à voir
+                }
+              </span>
+
+            </button>
+
+          }
+
+        </div>
+
+        <!-- EXPLICATION DU SIGNE -->
+        @if (signeActif) {
+
+          <div class="explanation-panel">
+
+            <div class="explanation-heading">
+
+              <strong>
+                {{ signeActif.id }}. {{ signeActif.titre }}
+              </strong>
+
+              <button
+                type="button"
+                class="explanation-close"
+                aria-label="Fermer l'explication"
+                (click)="fermerExplication()"
+              >
+                ×
+              </button>
+
+            </div>
+
+            <p>
+              {{ signeActif.explication }}
+            </p>
+
+          </div>
+
+        }
+
+        <!-- BOUTON SUIVANT -->
+        <button
+          type="button"
+          class="next-button"
+          [disabled]="!peutContinuer"
+          (click)="continuer()"
+        >
+          Suite : les fêtes →
+        </button>
+
+        @if (!peutContinuer) {
+
+          <p class="progress-help">
+            Découvre au moins 3 signes pour continuer.
+          </p>
+
+        }
+
+      </aside>
+
+    </div>
+
+    <!-- PIED DE PAGE -->
+    <footer class="lecture-footer">
+      Étape 4 : le pouvoir et l'architecture
+      <span>|</span>
+      Projet de théorie et histoire de l'urbanisme
+    </footer>
+
+  </div>
+
+</section>
