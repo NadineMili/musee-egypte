@@ -336,4 +336,6 @@ export class Pouvoir {
   ouvrirComparateur(): void {
     // Le comparateur sera ajouté à l'étape suivante.
   }
+
+
 }

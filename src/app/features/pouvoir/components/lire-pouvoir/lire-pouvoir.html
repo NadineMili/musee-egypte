@@ -1,64 +1,53 @@
-
 <section class="lecture-page">
 
   <div class="lecture-container">
 
     <!-- EN-TÊTE -->
+
     <header class="lecture-header">
 
-      <div class="header-top">
-        <button
-          type="button"
-          class="back-link"
-          (click)="retourTemple()"
-        >
-          ← Retour au temple de Karnak
-        </button>
-
-        <span class="step-label">
-          ÉTAPE 4 SUR 5 — LE POUVOIR ET L'ARCHITECTURE
-        </span>
-      </div>
+      <button
+        type="button"
+        class="back-link"
+        (click)="retourTemple()">
+        ← Retour au temple de Karnak
+      </button>
 
       <h1>
         Comment le pouvoir se lit-il dans la pierre ?
       </h1>
 
-      <p class="header-description">
-        Clique sur les points numérotés de l'image pour repérer
-        cinq signes du pouvoir.
+      <p>
+        Clique sur les points numérotés de l'image
+        pour repérer cinq signes du pouvoir.
       </p>
 
     </header>
 
-    <!-- IMAGE ET PANNEAU -->
+    <!-- CONTENU PRINCIPAL -->
+
     <div class="lecture-layout">
 
-      <!-- IMAGE INTERACTIVE -->
+      <!-- IMAGE -->
+
       <div class="lecture-image-panel">
 
         <div class="image-interactive">
 
           <img
             src="/images/territoire/finaaaal.png"
-            alt="Pylône monumental d'un temple de l'Égypte antique"
-            class="pylone-image"
-          >
+            alt="Pylône monumental d'un temple égyptien"
+            class="pylone-image">
 
-          <!--
-            Masque du texte n°4 déjà présent
-            dans l'illustration originale.
-          -->
+          <!-- MASQUER LE BLOC 4 INTÉGRÉ À L'IMAGE -->
+
           <div
-            class="image-text-mask"
-            aria-hidden="true"
-          ></div>
+            class="cache-texte-image"
+            aria-hidden="true">
+          </div>
 
-          <!--
-            Les numéros existent déjà sur l'image.
-            On ajoute seulement des zones cliquables
-            transparentes pour éviter les doublons.
-          -->
+          <!-- POINTS CLIQUABLES -->
+
           @for (signe of signes; track signe.id) {
 
             <button
@@ -69,13 +58,35 @@
               [style.left.%]="signe.positionX"
               [style.top.%]="signe.positionY"
               [attr.aria-label]="'Découvrir : ' + signe.titre"
-              [attr.aria-pressed]="signeActif?.id === signe.id"
-              (click)="selectionnerSigne(signe)"
-            >
-              <span class="sr-only">
-                {{ signe.id }}. {{ signe.titre }}
-              </span>
+              (click)="selectionnerSigne(signe)">
             </button>
+
+          }
+
+          <!-- EXPLICATION -->
+
+          @if (signeActif) {
+
+            <div class="explanation-bubble">
+
+              <button
+                type="button"
+                class="bubble-close"
+                aria-label="Fermer l'explication"
+                (click)="fermerExplication()">
+                ×
+              </button>
+
+              <strong>
+                {{ signeActif.id }}.
+                {{ signeActif.titre }}
+              </strong>
+
+              <p>
+                {{ signeActif.explication }}
+              </p>
+
+            </div>
 
           }
 
@@ -88,32 +99,32 @@
 
       </div>
 
-      <!-- PANNEAU DE DROITE -->
+      <!-- PANNEAU DROIT -->
+
       <aside class="lecture-information">
+
+        <!-- PROGRESSION -->
 
         <div class="progress-header">
 
           <strong>
-            Signes repérés : {{ nombreDecouverts }}/5
+            Signes repérés :
+            {{ nombreDecouverts }}/5
           </strong>
 
-          <div
-            class="progress-track"
-            role="progressbar"
-            [attr.aria-valuenow]="nombreDecouverts"
-            aria-valuemin="0"
-            aria-valuemax="5"
-            aria-label="Signes du pouvoir découverts"
-          >
+          <div class="progress-track">
+
             <div
               class="progress-fill"
-              [style.width.%]="progression"
-            ></div>
+              [style.width.%]="progression">
+            </div>
+
           </div>
 
         </div>
 
-        <!-- LISTE DES CINQ SIGNES -->
+        <!-- LISTE DES SIGNES -->
+
         <div class="signes-list">
 
           @for (signe of signes; track signe.id) {
@@ -123,8 +134,7 @@
               class="signe-card"
               [class.discovered]="estDecouvert(signe.id)"
               [class.selected]="signeActif?.id === signe.id"
-              (click)="selectionnerSigne(signe)"
-            >
+              (click)="selectionnerSigne(signe)">
 
               <span class="signe-number">
                 {{ signe.id }}
@@ -143,11 +153,9 @@
               </span>
 
               <span class="signe-status">
-                @if (estDecouvert(signe.id)) {
-                  vu
-                } @else {
-                  à voir
-                }
+
+                {{ estDecouvert(signe.id) ? 'vu' : 'à voir' }}
+
               </span>
 
             </button>
@@ -156,44 +164,16 @@
 
         </div>
 
-        <!-- EXPLICATION DU SIGNE -->
-        @if (signeActif) {
-
-          <div class="explanation-panel">
-
-            <div class="explanation-heading">
-
-              <strong>
-                {{ signeActif.id }}. {{ signeActif.titre }}
-              </strong>
-
-              <button
-                type="button"
-                class="explanation-close"
-                aria-label="Fermer l'explication"
-                (click)="fermerExplication()"
-              >
-                ×
-              </button>
-
-            </div>
-
-            <p>
-              {{ signeActif.explication }}
-            </p>
-
-          </div>
-
-        }
-
         <!-- BOUTON SUIVANT -->
+
         <button
           type="button"
           class="next-button"
           [disabled]="!peutContinuer"
-          (click)="continuer()"
-        >
+          (click)="continuer()">
+
           Suite : les fêtes →
+
         </button>
 
         @if (!peutContinuer) {
@@ -209,10 +189,15 @@
     </div>
 
     <!-- PIED DE PAGE -->
+
     <footer class="lecture-footer">
+
       Étape 4 : le pouvoir et l'architecture
+
       <span>|</span>
+
       Projet de théorie et histoire de l'urbanisme
+
     </footer>
 
   </div>

@@ -1303,3 +1303,25 @@
     animation-duration: 0.01ms !important;
   }
 }
+.btn-lecture-pouvoir {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 14px 20px;
+
+  background: #f3a12b;
+  color: #251a0e;
+
+  border: none;
+  border-radius: 11px;
+
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: #e38e1a;
+  }
+}
